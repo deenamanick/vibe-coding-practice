@@ -134,6 +134,24 @@ docker rm deploy-demo-app
 
 ---
 
+## Optional: Deploy on Netlify (frontend)
+Netlify is used to deploy **static sites** and **frontend apps** (Vite/React).
+
+### Deploy from GitHub
+1. Push project to GitHub.
+2. Netlify → Add new site → Import from Git.
+3. Build: `npm run build`
+4. Publish directory: `dist`
+
+### Deploy using Netlify CLI (optional)
+```bash
+npm install -g netlify-cli
+netlify login
+npm run build
+netlify deploy --prod --dir=dist
+```
+
+
 ## Quick deployment checklist
 | Item | Example |
 |---|---|
