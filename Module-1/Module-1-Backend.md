@@ -10,6 +10,27 @@ Website displays the joke (setup + punchline)
 
 ---
 
+### How to run (Windows + Chrome)
+
+1) Create a file named exactly `index.html` (not `index.html.txt`).
+2) Paste the code below and save.
+3) Open `index.html` in Chrome and click `Get Joke`.
+
+Tip: if using Notepad, use `Save As...` → `All Files (*.*)` and file name `index.html`.
+
+### Troubleshooting
+
+- If the joke does not load:
+  - Open Chrome DevTools → `F12` → `Console` and check for errors.
+  - Ensure you have an internet connection (the joke API is online).
+- If `fetch()` is blocked when opening the file directly:
+  - Run a local server in the folder and open the `http://` URL instead of `file:///`.
+  - Windows PowerShell:
+    - `python -m http.server 9003`
+    - Open: `http://127.0.0.1:9003`
+
+VS Code: `Terminal` → `New Terminal` → run `python -m http.server 9003`, or use the **Live Server** extension.
+
 ```
 <!-- This line tells the browser: "This is an HTML5 webpage" -->
 <!DOCTYPE html>

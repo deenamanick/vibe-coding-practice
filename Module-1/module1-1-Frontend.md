@@ -10,6 +10,31 @@ Website displays: “Welcome, [Name]!”
 
 ---
 
+### Windows note (important)
+
+If you create the file using Notepad on Windows, it may get saved as `index.html.txt`, which won’t run as a webpage.
+
+To make it work easily in Windows + Chrome:
+
+1) **Turn on file extensions**
+   - File Explorer → `View` → `Show` → enable `File name extensions`
+
+2) **Use VS Code (recommended)**
+   - Create a folder (example: `student-page`)
+   - In VS Code: `File` → `Open Folder...`
+   - Create a new file named exactly: `index.html`
+   - Paste the code and save
+
+3) **If using Notepad**
+   - `File` → `Save As...`
+   - Set `Save as type` to `All Files (*.*)`
+   - File name: `index.html` (include the `.html`)
+   - Encoding: `UTF-8`
+
+4) **Open in Chrome**
+   - Right click `index.html` → `Open with` → `Google Chrome`
+   - Or drag and drop the file into Chrome
+
 ```<!-- This line tells the browser: "This is an HTML5 webpage" -->
 <!DOCTYPE html>
 

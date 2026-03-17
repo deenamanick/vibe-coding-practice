@@ -58,6 +58,8 @@ Different purposes need different trade-offs:
 
 ## Hands-on demos (runnable)
 
+Windows note: use **PowerShell**. For TCP/UDP demos, if `nc` is not available, install **Nmap** (includes `ncat`) or use WSL/Git Bash.
+
 ### Demo A: TCP (using `nc`)
 Open two terminals.
 
@@ -71,6 +73,14 @@ nc -l 127.0.0.1 9001
 printf "msg-1\nmsg-2\nmsg-3\n" | nc 127.0.0.1 9001
 ```
 
+**Windows (PowerShell, using `ncat`):**
+```powershell
+ncat -l 127.0.0.1 9001
+```
+```powershell
+"msg-1`nmsg-2`nmsg-3`n" | ncat 127.0.0.1 9001
+```
+
 ### Demo B: UDP (using `nc -u`)
 Open two terminals.
 
@@ -82,6 +92,14 @@ nc -u -l 127.0.0.1 9002
 **Terminal 2 (sender):**
 ```bash
 printf "packet-1\npacket-2\npacket-3\n" | nc -u 127.0.0.1 9002
+```
+
+**Windows (PowerShell, using `ncat`):**
+```powershell
+ncat -u -l 127.0.0.1 9002
+```
+```powershell
+"packet-1`npacket-2`npacket-3`n" | ncat -u 127.0.0.1 9002
 ```
 
 ### Demo C: HTTP (server + curl)
