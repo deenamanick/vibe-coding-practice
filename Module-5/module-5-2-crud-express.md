@@ -15,23 +15,26 @@ Build a tiny Express API with an in-memory `notes` array (no database).
 
 ### How
 
-#### Step 1: Create project
+#### Step 1: Create the project folder
 
 ```bash
 mkdir notes-api
 cd notes-api
 npm init -y
 npm i express cors
-npm i -D nodemon
 ```
 
-Add to `package.json`:
+What this did:
 
-- `"dev": "nodemon index.js"`
+- created a new Node project
+- installed Express (the API server)
+- installed CORS (so browsers can call your API)
 
-#### Step 2: Create `index.js`
+#### Step 2: Create the API file (`index.js`)
 
-Create a server with:
+In VS Code, create a file named `index.js` in the `notes-api` folder.
+
+Then copy/paste this entire code:
 
 - `app.use(cors())`
 - `app.use(express.json())`
@@ -69,7 +72,21 @@ app.post("/notes", (req, res) => {
 app.listen(3000, () => console.log("API running on http://localhost:3000"));
 ```
 
-#### Step 3: Test with curl
+#### Step 3: Run the API
+
+In the same folder:
+
+```bash
+node index.js
+```
+
+What you should see in the terminal:
+
+- `API running on http://localhost:3000`
+
+#### Step 4: Test the API (curl or Postman)
+
+Option A: curl (terminal)
 
 - Create:
 
@@ -84,6 +101,17 @@ curl -sS -X POST "http://localhost:3000/notes" \
 ```bash
 curl -sS "http://localhost:3000/notes"
 ```
+
+Option B: Postman
+
+- `GET http://localhost:3000/health`
+- `POST http://localhost:3000/notes` with JSON body: `{ "title": "First", "content": "Hello" }`
+- `GET http://localhost:3000/notes`
+
+What you should see:
+
+- `GET /notes` returns `[]` at first
+- after you create, `GET /notes` returns a list with your note
 
 ### Exercise A: Add the remaining CRUD routes
 
@@ -103,3 +131,12 @@ Checklist:
 - [ ] `GET /notes/:id` returns `404` when missing
 - [ ] `PUT` updates the note
 - [ ] `DELETE` removes it
+
+### Troubleshooting (common beginner issues)
+
+- If `node index.js` fails:
+  - Make sure you are inside the `notes-api` folder
+  - Confirm Node is installed: `node -v`
+- If `GET /notes` does not work:
+  - Make sure the server is running and you see the "API running" message
+  - Try the URL in a browser: `http://localhost:3000/notes`

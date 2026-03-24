@@ -14,6 +14,55 @@ You will design an API for a `notes` resource.
 
 Implementation note: the actual Express code for building this API is in **Practical 2** (`module-5-2-crud-express.md`).
 
+### Quick start (run notes API + test `GET /notes`)
+
+Create a folder and run:
+
+```bash
+mkdir notes-api
+cd notes-api
+npm init -y
+npm i express cors
+```
+
+Create `index.js` (copy/paste):
+
+```js
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+let notes = [];
+
+app.get("/health", (req, res) => res.json({ ok: true }));
+app.get("/notes", (req, res) => res.json(notes));
+
+app.post("/notes", (req, res) => {
+  const { title, content } = req.body || {};
+  if (!title || !content) return res.status(400).json({ error: "title and content are required" });
+  const note = { id: String(Date.now()), title, content, createdAt: new Date().toISOString() };
+  notes.push(note);
+  res.status(201).json(note);
+});
+
+app.listen(3000, () => console.log("API running on http://localhost:3000"));
+```
+
+Start the server:
+
+```bash
+node index.js
+```
+
+Test `GET /notes`:
+
+```bash
+curl -sS http://localhost:3000/notes
+```
+
 ### How (design first)
 
 Define:
