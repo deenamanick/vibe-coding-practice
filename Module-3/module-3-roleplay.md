@@ -39,6 +39,11 @@
 
 **Jeevi**: *[Smiles]* That’s the spirit, Alex. I’ll send you the preview link in an hour!
 
+### 📝 **Example: The "Sentiment Dashboard" Vibe Prompt**
+*Here is the kind of prompt Jeevi used to build the dashboard in minutes:*
+
+> "Build a React dashboard for customer sentiment analysis. It should connect to our `/api/sentiment` endpoint. Show a large gauge for 'Overall Satisfaction', a line chart for 'Sentiment Trends' over the last 30 days, and a list of 'Recent Negative Comments' that need urgent attention. Use a clean, 'Apple-style' aesthetic with plenty of white space and soft shadows."
+
 ---
 
 ---
@@ -66,6 +71,18 @@
 **Jeevi**: Exactly. It's the difference between a **GPS map** (Chatbot) that tells you where to go, and a **Self-Driving Car** (AI Agent) that actually takes you there.
 
 **Alex**: This is a game-changer for our support roadmap. Let’s look at where we can replace "forms" with "agents" next week!
+
+### 📝 **Example: The "Order Cancellation" Agent Logic**
+*Here is how an AI Agent 'reasons' through a task differently than a script:*
+
+**The Mission**: "Cancel order #4567"
+
+1.  **Reasoning Step**: "I need to check if order #4567 exists." -> *Calls Database Tool*
+2.  **Reasoning Step**: "Order found. Status is 'Processing'. I can still cancel it."
+3.  **Action**: "Triggering cancellation in backend." -> *Calls API Tool*
+4.  **Reasoning Step**: "Cancellation successful. Now I need to notify the user."
+5.  **Action**: "Sending confirmation email." -> *Calls Email Tool*
+6.  **Final Response**: "Your order #4567 has been cancelled and a refund has been initiated."
 
 ---
 

@@ -21,6 +21,11 @@
 
 **Jeevi**: Exactly. If I just say "fix it," it might make another guess. I’m giving it **context**—the library documentation and the error log. I’m the detective; the AI is the forensic lab.
 
+### 📝 **Example: The "Detective" Debugging Prompt**
+*Instead of saying "Fix this crash," Jeevi uses a structured prompt like this:*
+
+> "My checkout page is throwing a `TypeError: payment.processTransaction is not a function`. I am using version 4.2.0 of the 'QuickPay' library. Here is the code snippet: [Paste Code]. Based on the QuickPay v4 docs, it seems `processTransaction` was renamed to `executePayment`. Please update the code to use the correct method and add a try-catch block to handle network errors."
+
 ---
 
 **Scenario 2: Cleaning Up the "Spaghetti" (Refactoring)**
@@ -40,6 +45,15 @@
 **Alex**: So you're using the AI to "tidy up" the house it just built?
 
 **Jeevi**: Precisely. It’s like having a robot that can instantly reorganize your closet. It takes the mess we made while moving in and turns it into a professional, organized system. The other engineers will love it.
+
+### 📝 **Example: The "Spaghetti to Clean" Refactor Prompt**
+*Jeevi selects a messy 50-line function and gives this instruction:*
+
+> "Refactor this `processOrders` function into smaller, reusable functions. 
+> 1. Separate the 'Tax Calculation' logic.
+> 2. Separate the 'Database Saving' logic.
+> 3. Use descriptive variable names (e.g., change `t` to `totalTax`).
+> 4. Ensure the output format remains exactly the same so I don't break the frontend."
 
 ---
 
