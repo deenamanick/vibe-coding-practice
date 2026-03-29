@@ -39,6 +39,32 @@ Content-Type: application/json
 
 This communication usually happens using the **HTTP protocol**.
 
+---
+
+## 🎨 Lovable AI Prompt (copy/paste this)
+
+```text
+Build a "Request-Response Visualizer" to understand how the Frontend and Backend talk.
+
+Requirements:
+- A split-screen UI: "Client (Frontend)" on the left, "Server (Backend)" on the right.
+- In the center, a "Network Tunnel" where data packets travel.
+- Interaction:
+  1. User clicks a "Send Request" button on the Client.
+  2. A "Request Packet" (JSON) physically slides through the tunnel to the Server.
+  3. The Server "Glows" while processing.
+  4. A "Response Packet" (JSON) slides back to the Client.
+- Visual Feedback:
+  - Display the HTTP Method (GET/POST) and Status Code (200/404/500) clearly.
+  - Use "Speech Bubbles" on the Client and Server to show the JSON data.
+  - Color-code success (Green) and errors (Red).
+- Use a "Modern Tech/Networking" theme (dark mode, neon blue lines, glowing data packets).
+
+Make it look like a high-tech communication simulation!
+```
+
+---
+
 ## Run a small demo (recommended)
 
 ### 1) Backend (Node.js + Express)

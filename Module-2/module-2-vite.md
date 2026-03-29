@@ -116,6 +116,26 @@ Note: after changing `.env`, restart the dev server (`npm run dev`).
 
 ---
 
+---
+
+## 🎨 Lovable AI Prompt (copy/paste this)
+
+```text
+Build a "Developer Portfolio Starter" using Vite and Axios.
+
+Requirements:
+- A "Project Showcase" section.
+- Functionality:
+  - Use Axios to fetch my GitHub repositories from the GitHub API (`https://api.github.com/users/YOUR_USERNAME/repos`).
+  - Display each repository as a card with its name, description, and "Star Count".
+- Environment: Use a `.env` file to store the API base URL.
+- Design: A dark-themed, sleek "Developer" aesthetic with glowing borders and fast transitions.
+
+Make it look like a professional tool for showing off open-source work!
+```
+
+---
+
 ## Common issues
 - **`npm: command not found`**
   - Install Node.js (npm comes with it)

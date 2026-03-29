@@ -201,6 +201,27 @@ document.querySelector("#load").addEventListener("click", loadTodo);
 
 ---
 
+---
+
+## 🎨 Lovable AI Prompt (copy/paste this)
+
+```text
+Build an "Interactive Task Tracker" using Vanilla JavaScript and LocalStorage.
+
+Requirements:
+- A clean UI with an input field and an "Add Task" button.
+- Functionality:
+  - When a task is added, show it in a list.
+  - Users can "Complete" a task (strikethrough text) or "Delete" it.
+  - Save the list to LocalStorage so tasks remain after refreshing the page.
+- Bonus: Add a "Fetch Random Quote" button at the bottom that calls an API and displays a motivational quote.
+- Design: Use a minimalist, focused theme with clear action buttons.
+
+Make it feel like a productive, snappy web application!
+```
+
+---
+
 ## Quick practice tasks
 - Add an `<input type="email">` and show it on submit
 - Store submitted names in an array and print them

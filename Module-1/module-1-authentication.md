@@ -24,6 +24,32 @@ Backend gives a signed token after login. Client sends it on each request.
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
+---
+
+## 🎨 Lovable AI Prompt (copy/paste this)
+
+```text
+Build a "JWT Authentication Visualizer" to understand how Login and Tokens work.
+
+Requirements:
+- A modern UI with a "Login Form" (Email/Password) and a "Protected Dashboard" area.
+- Visual Flow:
+  1. User enters credentials.
+  2. Show a "Loading" state representing the Backend check.
+  3. On success, show a "Signed Token" (JWT) being received and stored.
+  4. Display the decoded JWT content (Header, Payload, Signature) in colored boxes.
+  5. A "Secure Request" button that sends the token to a "Locked" endpoint.
+- Visual Feedback:
+  - If the token is present, show a "Green Padlock" and unlock the dashboard.
+  - If the token is missing/expired, show a "Red Shield" and access denied.
+- Use a "Security/Auth" theme (dark blues, deep purples, glowing lock icons).
+
+Make it look like a high-tech security gate system for a modern app!
+```
+
+---
+```
+
 ## OAuth
 “Login with Google/GitHub”. You authenticate via a provider and get an access token.
 

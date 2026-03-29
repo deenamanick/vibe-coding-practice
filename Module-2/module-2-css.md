@@ -172,6 +172,25 @@ Then style it with CSS:
 
 ---
 
+---
+
+## 🎨 Lovable AI Prompt (copy/paste this)
+
+```text
+Build a "Modern Product Landing Page" using Flexbox and Responsive Design.
+
+Requirements:
+- A sticky "Top Bar" with a logo and navigation links.
+- A "Hero Section" with a catchy headline and a primary CTA button.
+- A "Features" grid that shows 3 cards. Each card should have an icon, title, and description.
+- Responsiveness: The grid should stack vertically on mobile and spread horizontally on desktop.
+- Design: Use a modern color palette (e.g., Indigo and Slate), rounded corners, and soft shadows on hover.
+
+Make it look like a high-end SaaS startup landing page!
+```
+
+---
+
 ## Quick practice tasks
 - Change the theme colors (header background, link color)
 - Make buttons look nicer (padding, border-radius)

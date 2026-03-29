@@ -198,6 +198,29 @@ export default function App() {
 
 ---
 
+---
+
+## 🎨 Lovable AI Prompt (copy/paste this)
+
+```text
+Build a "Modern AI Chatbot Interface" using React and State Management.
+
+Requirements:
+- A classic "Chat Window" layout with a scrollable message area and a fixed bottom input bar.
+- Components:
+  - `ChatMessage`: To display individual messages (differentiate between 'User' and 'AI' styles).
+  - `ChatInput`: A controlled form to type and send messages.
+- Functionality:
+  - Use `useState` to manage the list of messages.
+  - When a user sends a message, add it to the list and simulate a "Typing..." state before adding a fake AI response.
+  - Use `useEffect` to fetch a welcome message from an API on mount.
+- Design: Modern, rounded chat bubbles, smooth scrolling, and a "ChatGPT-like" clean aesthetic.
+
+Make it look like a high-end AI product interface!
+```
+
+---
+
 ## Suggestions (next steps)
 - Use React DevTools
 - Keep components small and reusable

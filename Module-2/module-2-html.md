@@ -111,6 +111,26 @@ Accessibility basics
 
 ---
 
+---
+
+## 🎨 Lovable AI Prompt (copy/paste this)
+
+```text
+Build a "Personal Portfolio Page" using semantic HTML.
+
+Requirements:
+- Structure: Header, Main (with About and Projects sections), and Footer.
+- Content:
+  - A navigation bar with links.
+  - A table showing a list of "My Skills" (Skill Name, Proficiency Level).
+  - A "Contact Me" form with name, email, and a message textarea.
+- Styling: Use clean, professional typography and spacing.
+
+Make it look like a professional developer's first website!
+```
+
+---
+
 ## Quick practice tasks
 - Replace the `<title>` with your own page title
 - Add an `<img>` with a meaningful `alt`
