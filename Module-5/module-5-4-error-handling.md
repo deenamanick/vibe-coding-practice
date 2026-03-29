@@ -129,7 +129,35 @@ Checklist:
 - [ ] Unhandled exceptions return 500 JSON
 - [ ] Error responses do not leak secrets
 
-Optional UI prompt (Lovable/Claude): build `index.html` with 2 buttons (GET `/this-route-does-not-exist`, GET `/crash`) and show status + JSON.
+---
+
+## 🎨 Lovable AI Prompt (copy/paste this)
+
+```text
+Build an "API Error Explorer" dashboard to visualize how a backend handles mistakes.
+
+Requirements:
+- A clean, modern UI with two main sections: "The Trigger" and "The Response".
+- Backend: http://localhost:3000
+- Use fetch() to call the API.
+
+Interactions:
+1. "Trigger 404" Button: Calls a non-existent route (e.g., /api/missing).
+2. "Trigger 500" Button: Calls the /crash route.
+3. "Valid Request" Button: Calls the /notes route.
+
+Visual Feedback:
+- Display the HTTP Status Code in a large, colored badge (Red for 500, Orange for 404, Green for 200).
+- Show the raw JSON response in a "Code Block" with syntax highlighting.
+- Add "Human Explanations":
+  - For 404: Show a "Map" icon with "Route Not Found".
+  - For 500: Show a "Fire" icon with "Server Crashed".
+- Use a "Developer Console" theme (dark mode, monospace fonts, subtle grid background).
+
+Make it look like a high-tech diagnostic tool for debugging APIs!
+```
+
+---
 
 ## Troubleshooting
 

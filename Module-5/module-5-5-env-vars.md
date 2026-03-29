@@ -187,6 +187,37 @@ Acceptance:
 
 ---
 
+## 🎨 Lovable AI Prompt (copy/paste this)
+
+```text
+Build an "Environment Variable Dashboard" to visualize how backend settings change without code edits.
+
+Requirements:
+- A modern, clean UI with a "Server Status" card.
+- Backend: http://localhost:3000 (or the port set in .env)
+- Use fetch() to call the API.
+
+Visual Elements:
+1. "Live Settings" Display:
+   - Large badge for current PORT.
+   - Distinctive badge for NODE_ENV (Blue for 'development', Purple for 'production').
+2. "Log Stream":
+   - A scrollable terminal-like view showing the logs from the backend.
+3. "Connection Tester":
+   - A "Ping Server" button that hits the /ping endpoint.
+   - Show a "Success" animation when the server responds.
+
+Interactive Logic:
+- Instructions on the side: "Step 1: Change PORT in .env. Step 2: Restart Server. Step 3: See the dashboard update!"
+- Real-time status: Show "Connected" or "Searching for Server..." based on the active port.
+
+Use a "DevOps/Infrastructure" theme (dark slate, neon accents, monospace fonts).
+
+Make it feel like a professional server monitoring tool!
+```
+
+---
+
 ## Important: Add `.env` to `.gitignore`
 
 Create or edit a file named `.gitignore` and add:

@@ -261,7 +261,42 @@ Then try:
 - `GET http://localhost:3000/notes`
 - `GET http://localhost:3000/notes/1`
 
-### Troubleshooting
+#---
+
+## 🎨 Lovable AI Prompt (copy/paste this)
+
+```text
+Build a "Full-Stack Notes Manager" to test my integrated Notes API.
+
+Requirements:
+- A modern, high-performance UI (React/Vue style).
+- Backend: http://localhost:3000
+- Use fetch() for all CRUD operations.
+
+Features:
+1. Note List:
+   - Display notes in a responsive grid or masonry layout.
+   - Show 'id', 'title', 'content', and a formatted 'createdAt' date.
+2. Note Creation/Editing:
+   - A modal or slide-over form to add or edit notes.
+   - Real-time validation (show errors if title/content are missing).
+3. Actions:
+   - "Delete" button with a confirmation dialog.
+   - "Edit" button to populate the form with existing note data.
+4. System Status:
+   - A "Health Check" indicator (hits /health) showing the server's environment.
+   - Loading states and "Toast" notifications for Success/Error messages.
+
+Design:
+- Use a "Productive/Note-taking" theme (warm yellows, clean whites, subtle shadows).
+- Add smooth transitions when adding or removing notes.
+
+Make it look like a professional note-taking app like Google Keep or Notion!
+```
+
+---
+
+## Troubleshooting
 
 - **Problem: `Cannot find module 'express'`**
   - **Fix**: run `npm install`.
