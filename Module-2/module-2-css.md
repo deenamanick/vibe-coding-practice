@@ -1,176 +1,14 @@
-## Module 2: CSS (basics + a slightly advanced mini layout)
+# Module 2: CSS (Styling your Website)
 
-Students will learn:
+### Why (in simple terms)
+If **HTML** is the skeleton of a house, **CSS** is the paint, the furniture, and the layout. 
+Without CSS, every website would just be black text on a white background. CSS makes things look professional, colorful, and organized.
 
-How to add CSS to HTML (inline, internal, external)
-
-Selectors (element, class, id)
-
-The box model (margin, border, padding)
-
-Colors, fonts, spacing
-
-Flexbox for layout
-
-Responsive design with media queries
-
----
-
-## Step 1: Add CSS to a page (3 ways)
-
-### 1a) Inline (not recommended for real projects)
-
-```html
-<p style="color: red;">Inline styled text</p>
-```
-
-### 1b) Internal CSS (inside `<style>`)
-
-```html
-<head>
-  <style>
-    body { font-family: Arial, sans-serif; }
-    h1 { color: #111827; }
-  </style>
-</head>
-```
-
-### 1c) External CSS (recommended)
-
-In HTML:
-```html
-<link rel="stylesheet" href="styles.css" />
-```
-
-In `styles.css`:
-```css
-body { font-family: Arial, sans-serif; }
-```
-
----
-
-## Step 2: Selectors (how CSS targets elements)
-
-```css
-/* element selector */
-h1 { color: #2563eb; }
-
-/* class selector (reusable) */
-.card { border: 1px solid #e5e7eb; padding: 12px; }
-
-/* id selector (unique) */
-#main { max-width: 900px; margin: 0 auto; }
-```
-
----
-
-## Step 3: The Box Model (very important)
-
-```css
-.box {
-  width: 200px;
-  padding: 16px;   /* space inside the box */
-  border: 2px solid #111827;
-  margin: 16px;    /* space outside the box */
-}
-
-/* Recommended: makes sizing easier */
-* { box-sizing: border-box; }
-```
-
----
-
-## Step 4: Common styling (colors, text, spacing)
-
-```css
-body {
-  margin: 0;
-  color: #111827;
-  background: #f9fafb;
-  line-height: 1.5;
-}
-
-a {
-  color: #2563eb;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-h1, h2 {
-  letter-spacing: 0.2px;
-}
-```
-
----
-
-## Step 5: Slightly advanced layout (Flexbox + responsive)
-
-Add these classes in your HTML:
-
-```html
-<div class="page">
-  <header class="topbar">
-    <h1>Student Portal</h1>
-    <nav class="nav">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#enroll">Enroll</a>
-    </nav>
-  </header>
-
-  <main class="container">
-    <section class="card">Card 1</section>
-    <section class="card">Card 2</section>
-  </main>
-</div>
-```
-
-Then style it with CSS:
-
-```css
-* { box-sizing: border-box; }
-
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 16px;
-  background: #111827;
-  color: white;
-}
-
-.nav a {
-  color: #e5e7eb;
-  margin-right: 12px;
-}
-
-.container {
-  max-width: 900px;
-  margin: 16px auto;
-  padding: 0 16px;
-  display: flex;
-  gap: 16px;
-}
-
-.card {
-  flex: 1;
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 16px;
-}
-
-/* Responsive: stack cards on small screens */
-@media (max-width: 700px) {
-  .container { flex-direction: column; }
-}
-```
-
----
+### What you'll learn
+1. **Selectors**: How to tell the browser *which* part to style.
+2. **The Box Model**: How much space an element takes up.
+3. **Flexbox**: How to align items (like a navigation bar).
+4. **Responsive Design**: Making your site look good on a phone.
 
 ---
 
@@ -186,14 +24,122 @@ Requirements:
 - Responsiveness: The grid should stack vertically on mobile and spread horizontally on desktop.
 - Design: Use a modern color palette (e.g., Indigo and Slate), rounded corners, and soft shadows on hover.
 
-Make it look like a high-end SaaS startup landing page!
+Make it look like a high-tech SaaS startup landing page!
+```
+
+---
+
+## Run a small demo (recommended)
+
+### Step 1: Create a folder
+1. Create a folder named `css-demo`.
+2. Open it in VS Code.
+
+### Step 2: Create `index.html`
+Copy and paste this code:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">MyBrand</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="card">
+            <h2>Card 1</h2>
+            <p>This is a simple card styled with CSS.</p>
+        </div>
+        <div class="card">
+            <h2>Card 2</h2>
+            <p>Flexbox makes these cards sit side-by-side.</p>
+        </div>
+    </main>
+</body>
+</html>
+```
+
+### Step 3: Create `style.css`
+Copy and paste this code:
+
+```css
+/* 1. Global Styles */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background-color: #f4f7f6;
+}
+
+/* 2. Navbar using Flexbox */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #333;
+    color: white;
+}
+
+.navbar nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+/* 3. Layout using Flexbox */
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 50px;
+}
+
+/* 4. The Box Model (Card Styling) */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 300px;
+    text-align: center;
+}
+
+/* 5. Responsive Design (For Phones) */
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
 ```
 
 ---
 
 ## Quick practice tasks
-- Change the theme colors (header background, link color)
-- Make buttons look nicer (padding, border-radius)
-- Create a `.danger` class (red border + light red background)
-- Add a hover effect to `.card` (slight shadow)
-- Make the navigation wrap nicely on small screens
+- **Change the background**: In `style.css`, change the `background-color` of `.card` to lightblue.
+- **Add a border**: Add `border: 2px solid #333;` to the `.card` class.
+- **Space it out**: Change the `gap: 20px;` in `.container` to `gap: 50px;`.
+- **Center the text**: Change the `text-align` in `.card` to `left`.
+
+---
+
+## Checklist
+- [ ] You understand that `display: flex` is for alignment.
+- [ ] You know that `@media` is for making sites look good on mobile.
+- [ ] You can change colors and spacing in a `.css` file.
