@@ -1,26 +1,76 @@
-## Practical 5: Environment variables
+# Module 5.5: Environment Variables (The App's Remote Control)
 
-### Why
+### Why (in simple terms)
+Imagine if every time you wanted to change the volume on your TV, you had to open up the back and solder new wires. That would be crazy! **Environment Variables** are like the **remote control** for your app. They let you change important settings (like the Port or API keys) **without touching the code**.
 
-Hardcoding values (ports, modes, keys) makes apps hard to deploy.
+### What you'll learn
+1.  **`.env` Files**: The secret notepad where settings live.
+2.  **`dotenv` Library**: The bridge that connects your notepad to your code.
+3.  **`process.env`**: How Node.js reads your settings while it's running.
+4.  **Security**: Why you must NEVER share your `.env` file with the world.
 
-Environment variables let you change settings **without changing code**.
+---
 
-### What
+## 🎨 Lovable AI Prompt (The Env-Var Dashboard)
 
-Use environment variables for:
+*Copy and paste this into [Lovable.ai] to build a tool that visualizes your server settings!*
 
-- `PORT`
-- `NODE_ENV`
+```text
+Build an "Environment Variable Dashboard" using React and Tailwind CSS.
 
-### How
+Requirements:
+- Layout: A modern "DevOps" style interface with dark slate and neon accents.
+- Features:
+  - "Live Settings" Card: Displays the current PORT and NODE_ENV (e.g., Development vs Production).
+  - "Log Stream": A scrollable terminal view that shows simulated server logs.
+  - "Mode Toggle": A visual switch that shows how logs change between "Quiet" (Production) and "Verbose" (Development).
+- Integration:
+  - Must fetch data from: http://localhost:3000/status
+- Design: Monospaced fonts, glowing status dots, and high-contrast badges.
 
-## Step 0: Create a small practice project
+Make it feel like a professional infrastructure monitoring tool!
+```
 
-1. Create a folder named `env-vars-practice`
-2. Open that folder in VS Code
+---
 
-## Step 1: Create a Node project and install packages
+## 🏗️ The "Remote Control" Pattern
+
+| Setting | Purpose | Example Value |
+| :--- | :--- | :--- |
+| **PORT** | Which "door" the server listens to. | `3000`, `8080` |
+| **NODE_ENV** | Is this a "Draft" (Dev) or "Final" (Prod)? | `development`, `production` |
+| **DATABASE_URL**| Where the data is stored. | `mongodb://localhost...` |
+| **API_KEY** | A secret password for other services. | `sk_test_51Mz...` |
+
+---
+
+## 🌊 Windsurf Practice: Setting up the Remote
+
+### Step 1: Initialize the Project
+1. Open **Windsurf** terminal and run:
+   ```bash
+   mkdir env-lab
+   cd env-lab
+   npm init -y
+   npm install express dotenv
+   ```
+
+### Step 2: Create the `.env` Secret File
+Ask Windsurf: `"Create a .env file with PORT=3000 and NODE_ENV=development. Also create a .gitignore file that excludes the .env file."`
+
+### Step 3: Connect the Code
+Ask Windsurf: `"Create a server.js that uses the 'dotenv' library to read the PORT from the .env file. Add a route /status that returns the current environment and port."`
+
+#### 💡 Code Breakdown (The Secret Sauce):
+- **`require("dotenv").config()`**: This is the "Plug-in". It reads the `.env` file and puts everything into `process.env`.
+- **`process.env.PORT || 3000`**: This is a "Fallback". It says "Use the remote control, but if it's missing, use 3000."
+- **`.gitignore`**: This is the **most important file**. It tells Git: "Do not upload my secret notepad (the `.env` file) to GitHub!"
+
+---
+
+## Practical 5: Environment Variables (Original Lab)
+
+### Step 1: Create a Node project and install packages
 
 In the VS Code Terminal (inside `env-vars-practice`) run:
 
@@ -29,7 +79,7 @@ npm init -y
 npm install express dotenv
 ```
 
-## Step 2: Create a `.env` file (copy/paste)
+### Step 2: Create a `.env` file (copy/paste)
 
 Create a file named `.env` in the same folder and paste:
 
@@ -38,12 +88,7 @@ PORT=3000
 NODE_ENV=development
 ```
 
-What this means:
-
-- `PORT` decides where your server runs (3000, 3001, etc.)
-- `NODE_ENV` is just a “mode” label (development vs production)
-
-## Step 3: Create `server.js` (copy/paste)
+### Step 3: Create `server.js` (copy/paste)
 
 Create a file named `server.js` and paste:
 
@@ -62,9 +107,13 @@ app.get("/", (req, res) => {
   res.json({ ok: true, env, port });
 });
 
-// Simple log example (we will change this behavior in Exercise B)
+// Environment-based logging
 app.use((req, res, next) => {
-  console.log(`[${env}] ${req.method} ${req.path}`);
+  if (env === "production") {
+    console.log(`${req.method} ${req.path}`);
+  } else {
+    console.log(`[${new Date().toISOString()}] [${env}] ${req.method} ${req.path}`);
+  }
   next();
 });
 
@@ -78,163 +127,17 @@ app.listen(port, () => {
 });
 ```
 
-## Step 4: Run the server
+---
 
-Run:
-
-```bash
-node server.js
-```
-
-Expected output:
-
-- `Server running on http://localhost:3000`
-- `NODE_ENV=development`
-
-Test in browser:
-
-- `http://localhost:3000/`
-- `http://localhost:3000/ping`
+## Quick practice tasks
+- **Add a Secret Message**: Add `SECRET_MESSAGE="Vibe coding is the future"` to your `.env` and show it on a new `/secret` route.
+- **Port Swapping**: Change the `PORT` in `.env` to `4000`, restart the server, and see if it works.
+- **Security Check**: Try to run `git add .env`. If you set up `.gitignore` correctly, Git should refuse to track it!
 
 ---
 
-#### Exercise A: Add `dotenv`
-
-You already installed `dotenv` and added:
-
-- `require("dotenv").config()`
-- `process.env.PORT`
-
-Now confirm it works:
-
-Step-by-step:
-
-1. In `.env`, change the port:
-
-```bash
-PORT=3001
-NODE_ENV=development
-```
-
-2. Restart your server:
-
-- Stop with `Ctrl+C`
-- Run `node server.js` again
-
-3. Open:
-
-- `http://localhost:3001/`
-
-Expected:
-
-- The server runs on `3001` without changing your code
-
-Checklist:
-
-- [ ] App uses `process.env.PORT`
-- [ ] `.env` is gitignored
-
-#### Exercise B: Environment-based logging
-
-Goal: in production you usually keep logs minimal.
-
-Step-by-step:
-
-1. In `server.js`, replace the logging middleware with this:
-
-```js
-app.use((req, res, next) => {
-  if (env === "production") {
-    console.log(`${req.method} ${req.path}`);
-  } else {
-    console.log(`[${new Date().toISOString()}] [${env}] ${req.method} ${req.path}`);
-  }
-  next();
-});
-```
-
-2. Update your `.env` to production:
-
-```bash
-PORT=3001
-NODE_ENV=production
-```
-
-3. Restart the server and open:
-
-- `http://localhost:3001/ping`
-
-Expected:
-
-- In terminal, you see shorter logs in production mode
-
-4. Change back to development:
-
-```bash
-PORT=3001
-NODE_ENV=development
-```
-
-Restart and hit `/ping` again.
-
-Expected:
-
-- In terminal, you see more detailed logs (timestamp + env)
-
-Acceptance:
-
-- You can switch behavior by changing `.env`.
-
----
-
-## 🎨 Lovable AI Prompt (copy/paste this)
-
-```text
-Build an "Environment Variable Dashboard" to visualize how backend settings change without code edits.
-
-Requirements:
-- A modern, clean UI with a "Server Status" card.
-- Backend: http://localhost:3000 (or the port set in .env)
-- Use fetch() to call the API.
-
-Visual Elements:
-1. "Live Settings" Display:
-   - Large badge for current PORT.
-   - Distinctive badge for NODE_ENV (Blue for 'development', Purple for 'production').
-2. "Log Stream":
-   - A scrollable terminal-like view showing the logs from the backend.
-3. "Connection Tester":
-   - A "Ping Server" button that hits the /ping endpoint.
-   - Show a "Success" animation when the server responds.
-
-Interactive Logic:
-- Instructions on the side: "Step 1: Change PORT in .env. Step 2: Restart Server. Step 3: See the dashboard update!"
-- Real-time status: Show "Connected" or "Searching for Server..." based on the active port.
-
-Use a "DevOps/Infrastructure" theme (dark slate, neon accents, monospace fonts).
-
-Make it feel like a professional server monitoring tool!
-```
-
----
-
-## Important: Add `.env` to `.gitignore`
-
-Create or edit a file named `.gitignore` and add:
-
-```gitignore
-.env
-```
-
-Why: `.env` may contain passwords or API keys in real projects.
-
-## Troubleshooting
-
-- **Problem: Changes in `.env` do not reflect**
-  - **Fix**: you must restart the server after changing `.env`.
-
-- **Problem: `PORT` is already in use**
-  - **Fix**: change `PORT` in `.env` to `3001` or `3002`.
-
-- **Problem: `.env` file not being read**
-  - **Fix**: make sure `.env` is in the same folder as `server.js`.
+## Checklist
+- [ ] You can explain the "Remote Control" analogy for environment variables.
+- [ ] Your `.env` file is listed in `.gitignore`.
+- [ ] You understand why `require("dotenv").config()` must be at the top of your code.
+- [ ] You can switch between "Development" and "Production" modes without changing code.

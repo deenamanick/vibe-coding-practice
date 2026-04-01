@@ -1,114 +1,114 @@
-## Practical 1: REST API basics
+# Module 5.1: REST API Basics (The App's Menu)
 
-### Why
+### Why (in simple terms)
+If a database is a **pantry** full of food, and the user is a **customer** at a table, then the **REST API** is the **waiter** and the **menu**. It provides a standard, predictable way for the frontend to ask for exactly what it needs without going into the kitchen itself.
 
-Frontends need a stable way to talk to a backend. REST is a simple, predictable pattern:
+### What you'll learn
+1.  **Resources**: Thinking of data as "things" (e.g., `/notes`, `/users`).
+2.  **Verbs (Methods)**: How to ask the waiter to "Bring", "Add", "Change", or "Remove".
+3.  **Status Codes**: The waiter's quick response (200 = "Here you go!", 404 = "We're out of that").
+4.  **JSON**: The universal language used to exchange data.
 
-- **Resources** (e.g. `notes`)
-- **Routes** (e.g. `GET /notes`)
-- **Status codes** (200/201/404/400/500)
+---
 
-### What
+## 🎨 Lovable AI Prompt (The REST Explorer)
 
-You will design an API for a `notes` resource.
+*Copy and paste this into [Lovable.ai] to build a visual tool that simulates how REST works!*
 
-Implementation note: the actual Express code for building this API is in **Practical 2** (`module-5-2-crud-express.md`).
+```text
+Build a "REST API Visualizer" using React and Tailwind CSS.
 
-### Quick start (run notes API + test `GET /notes`)
+Requirements:
+- Layout: A vertical split screen. Top is the "Client" (Frontend), Bottom is the "Server" (Backend).
+- Features:
+  - An animated "Data Packet" that moves between Client and Server when a button is clicked.
+  - Buttons for different Methods: GET, POST, PUT, PATCH, DELETE.
+  - A "Status Code" display that changes based on the method (e.g., POST shows 201 Created).
+  - A JSON preview window showing the data being sent/received.
+- Design: Modern, clean, with "circuit board" style connecting lines and glowing status indicators.
 
-Create a folder and run:
-
-```bash
-mkdir notes-api
-cd notes-api
-npm init -y
-npm i express cors
+Make it look like a high-tech lab for testing data flows!
 ```
 
-Create `index.js` (copy/paste):
+---
 
-```js
-const express = require("express");
-const cors = require("cors");
+## 🏗️ The Method Cheat Sheet (POST vs PUT vs PATCH)
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+Students often get confused here. Here is the "House Renovation" analogy:
 
-let notes = [];
+| Method | Analogy | Technical Term |
+| :--- | :--- | :--- |
+| **POST** | **Building a new house** on an empty lot. | Create |
+| **PUT** | **Replacing the entire house** with a brand new one. | Update (Full) |
+| **PATCH** | **Fixing a broken window** or painting one wall. | Update (Partial) |
+| **GET** | **Looking at the house** through a telescope. | Read |
+| **DELETE** | **Tearing down the house.** | Delete |
 
-app.get("/health", (req, res) => res.json({ ok: true }));
-app.get("/notes", (req, res) => res.json(notes));
+---
 
-app.post("/notes", (req, res) => {
-  const { title, content } = req.body || {};
-  if (!title || !content) return res.status(400).json({ error: "title and content are required" });
-  const note = { id: String(Date.now()), title, content, createdAt: new Date().toISOString() };
-  notes.push(note);
-  res.status(201).json(note);
-});
+## 🔬 Beyond REST: GraphQL & gRPC
 
-app.listen(3000, () => console.log("API running on http://localhost:3000"));
+While REST is the most common, you will hear about these in advanced projects:
+
+### 1. GraphQL (The "Custom Order")
+*   **When it comes**: When your app is huge (like Facebook) and you only want *specific* pieces of data (e.g., "just the user's name, not their whole profile").
+*   **Analogy**: Instead of a set menu, you give the waiter a specific list of ingredients you want on your plate.
+*   **Example Query**:
+    ```graphql
+    query {
+      user(id: "123") {
+        name
+        email
+        # Only getting what we need, nothing more!
+      }
+    }
+    ```
+
+### 2. gRPC (The "High-Speed Rail")
+*   **When it comes**: When two servers need to talk to each other *insanely fast* (Microservices).
+*   **Analogy**: A private, high-speed pneumatic tube between two buildings. It's much faster than a waiter walking, but harder to set up.
+*   **Example (.proto file)**:
+    ```protobuf
+    service NoteService {
+      rpc GetNote (NoteRequest) returns (NoteResponse) {}
+    }
+    
+    message NoteRequest {
+      string id = 1;
+    }
+    ```
+
+---
+
+## 🌊 Windsurf Practice: Designing the "Notes" API
+
+### Step 1: The Design Prompt
+Ask Windsurf: 
+```text
+ROLE: Backend Architect.
+TASK: Propose a RESTful URL structure for a "Notes" application.
+CONTEXT: We need to handle:
+- Listing all notes
+- Creating a new note
+- Updating a note's title
+- Deleting a note
+OUTPUT: A Markdown table showing the Method, URL, and expected Status Code.
 ```
 
-Start the server:
+#### 💡 Code Breakdown (Why REST is standard):
+- **Predictability**: Notice how every URL starts with `/notes`. This makes it easy for other developers to understand your API without reading 100 pages of documentation.
 
-```bash
-node index.js
-```
+---
 
-Test `GET /notes`:
+## Quick practice tasks
+- **Status Code Match**: If a user tries to GET a note that doesn't exist, which status code should you return? (Hint: 404).
+- **Patch vs Put**: If I only want to change the `isCompleted` status of a task, should I use PUT or PATCH?
+- **Resource Naming**: If you were building an API for a library, what would be the resource name for books? (Hint: `/books`).
 
-```bash
-curl -sS http://localhost:3000/notes
-```
+---
 
-### How (design first)
-
-Define:
-
-- Resource name: `notes`
-- Fields:
-  - `id` (string)
-  - `title` (string)
-  - `content` (string)
-  - `createdAt` (ISO string)
-
-Routes:
-
-- `GET /health` → service is alive
-- `GET /notes` → list notes
-- `GET /notes/:id` → get one note
-- `POST /notes` → create
-- `PUT /notes/:id` → replace/update
-- `DELETE /notes/:id` → delete
-
-### Exercise A: Status codes
-
-For each route, decide the correct status code:
-
-- Create success
-- Not found
-- Bad request
-- Delete success
-
-Expected outcome:
-
-- `201` for create
-- `404` when note doesn’t exist
-- `400` for invalid input
-- `204` for successful delete (no body) OR `200` with a small JSON message
-
-Checklist:
-
-- [ ] You used nouns for resources (`notes`) not verbs
-- [ ] You used plural resource name (`/notes`)
-- [ ] You can explain why a status code is used
-
-### Postman examples
-
-Base URL: `http://localhost:3000`
-
-- `GET /health` → URL: `http://localhost:3000/health`
-- `POST /notes` → URL: `http://localhost:3000/notes` → Body (raw JSON): `{"title":"First","content":"Hello"}`
-- `GET /notes` → URL: `http://localhost:3000/notes`
+## Checklist
+- [ ] You can explain the "Waiter" analogy for REST APIs.
+- [ ] You know the difference between POST, PUT, and PATCH.
+- [ ] You understand that 200 means success and 404 means not found.
+- [ ] You have designed a basic URL structure for a new resource.
