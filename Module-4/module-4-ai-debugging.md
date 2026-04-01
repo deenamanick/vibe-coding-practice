@@ -1,65 +1,82 @@
-## Practical 3: AI-assisted debugging
+# Module 4.3: AI Debugging (The Bug Hunter)
 
-Goal: use AI as a debugging partner without letting it guess.
+### Why (in simple terms)
+Even the best AI makes mistakes. **AI Debugging** is how you "find the fly in the soup." Instead of getting frustrated, you learn to use the AI as a high-tech magnifying glass to find and fix errors in seconds.
 
-### Debugging prompt template (copy/paste)
+### What you'll learn
+1.  **Error Log Analysis**: How to feed "scary red text" into AI for instant fixes.
+2.  **The "Rubber Duck" Method**: Explaining your code to AI to find logic flaws.
+3.  **Windsurf Context**: Using `@file` and `@folder` to give the AI the full picture.
+4.  **Step-by-Step Tracing**: Asking the AI to "think out loud" before changing code.
+
+---
+
+## 🎨 Lovable AI Prompt (The "Bug Lab" UI)
+
+*Copy and paste this into [Lovable.ai] to build a simulator for common bugs!*
 
 ```text
-You are a senior engineer. Help me debug.
+Build a "Bug Hunter Lab" using React and Tailwind CSS.
 
-Context:
-- Stack: <React/Vite/Node/etc>
-- What I expected:
-- What actually happened:
-- Frequency (always/sometimes):
-- Browser/OS:
+Requirements:
+- Layout: A clean, dashboard-style interface.
+- Bug Simulators: 
+  - Button 1: "State Reset" (A form that clears itself unexpectedly).
+  - Button 2: "Infinite Loop" (A counter that crashes the browser - use a safe simulated version!).
+  - Button 3: "Prop Drilling" (A value that doesn't reach the child component).
+- Interaction: 
+  - Each button "breaks" a small component on screen.
+  - Show a "Debug Prompt" that helps the user ask an AI to fix it.
+- Design: Modern "Cyberpunk" aesthetic with neon accents and "glitch" effects.
 
-Evidence:
-- Error message:
-- Console logs:
-- Minimal code snippet:
-
-Rules:
-- Do not guess. Ask clarifying questions first.
-- Provide 3 hypotheses max.
-- For each hypothesis: give 1-2 targeted checks.
-- Only then propose a fix.
+Make it look like a training ground for professional debuggers!
 ```
 
-### Exercise A: Debug a broken function
+---
 
-Broken code:
+## 🏗️ The 3-Step Debugging Loop
 
-```js
-function total(items) {
-  return items.reduce((sum, x) => sum + x.price, 0);
-}
+When your code breaks, don't just say "it's broken." Use this:
+1.  **THE ERROR**: Copy the *exact* red text from the console.
+2.  **THE FILE**: Tell the AI which file you are looking at.
+3.  **THE INTENT**: Tell the AI what was *supposed* to happen.
 
-console.log(total([{ price: 10 }, { price: "5" }]));
+---
+
+## 🌊 Windsurf Practice: The "Silent Bug" Hunt
+
+### Step 1: Create a Broken Component
+Ask Windsurf: 
+```text
+Create a 'Counter' component with an 'Increment' button.
+But intentionally break the state so it doesn't update (e.g., use a regular variable instead of useState).
 ```
 
-Task:
-- Use the template to ask the AI for:
-  - the root cause
-  - the smallest safe fix
-  - how to prevent it (type checks / tests)
+### Step 2: Ask the AI to Investigate
+Ask Windsurf: 
+```text
+ROLE: Senior Debugger.
+TASK: My counter isn't updating when I click the button. 
+CONTEXT: React + Vite project.
+INPUT: @App.jsx
+OUTPUT: Explain WHY it's not updating, then give me the fix.
+```
 
-Expected outcome:
-- Fix handles numeric strings safely OR rejects invalid input.
+#### 💡 Code Breakdown (Why this works):
+- **Console Logs**: Notice how the AI suggests adding `console.log()` to see if the function is even running.
+- **Root Cause**: The AI explains that React only "listens" to `useState` changes, not regular variables.
 
-Checklist:
-- [ ] AI requests missing info instead of guessing
-- [ ] Hypotheses are testable
-- [ ] Fix is minimal and reversible
+---
 
-### Exercise B: Debug a UI issue (state reset)
+## Quick practice tasks
+- **Feed the Console**: Intentionally misspell a variable name, then paste the "ReferenceError" into the chat.
+- **The "Explain" Trick**: Highlight a complex piece of code and ask: "Explain this to me like I'm 5 years old."
+- **Trace the Data**: If a value isn't showing up, ask the AI: "Where is the data getting lost in this component tree?"
 
-Scenario:
+---
 
-- A controlled input clears while typing.
-
-Task:
-- Ask AI to propose logging/inspection steps before providing a fix.
-
-Acceptance:
-- You can explain what caused the re-render/reset.
+## Checklist
+- [ ] You know how to find the "Red Text" (Errors) in the browser console.
+- [ ] You can provide enough context (@file) for the AI to debug accurately.
+- [ ] You understand that "Thinking out loud" is better than "Just fixing it."
+- [ ] You have successfully used AI to fix at least one "Silent Bug."

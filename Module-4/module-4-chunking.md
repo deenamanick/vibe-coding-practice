@@ -1,56 +1,76 @@
-## Practical 2: Breaking problems into AI-friendly chunks
+# Module 4.2: Chunking (How to Eat an Elephant)
 
-Goal: learn to split a big vague task into smaller prompts the AI can complete correctly.
+### Why (in simple terms)
+If you ask the AI to "build a whole Amazon clone" in one go, it will get confused, skip parts, and make mistakes. **Chunking** is the art of breaking a big project into tiny, bite-sized tasks. It's how you "eat an elephant"—one bite at a time.
 
-### Core idea
+### What you'll learn
+1.  **Vertical Slicing**: Building one feature from front-to-back before moving to the next.
+2.  **Modular Thinking**: Creating components as independent "LEGO bricks."
+3.  **Windsurf Context**: How to guide Windsurf to finish one file before starting the next.
+4.  **Incremental Testing**: Running your app after every small change.
 
-Instead of asking:
+---
 
-```text
-Build my whole app.
-```
+## 🎨 Lovable AI Prompt (The "To-Do Chunking" Dashboard)
 
-Ask in chunks:
-
-1) clarify requirements
-2) design plan
-3) implement one file
-4) write tests/checks
-5) review + refactor
-
-### Exercise A: Chunk a feature request
-
-Feature request:
+*Copy and paste this into [Lovable.ai] to visualize how chunking works!*
 
 ```text
-Build a to-do app with categories, search, and local storage.
+Build a "Project Chunker" dashboard using React and Tailwind CSS.
+
+Requirements:
+- Layout: A clean, task-oriented UI.
+- Main Feature: "The Elephant" (A large goal input).
+- Tasks: A dynamic list where users can break the "Elephant" into 5 "Bites" (Tasks).
+- Interaction: 
+  - Each task has a "Ready to Vibe" button.
+  - When clicked, it shows a "Prompt for AI" specific to that chunk.
+- Design: Modern, minimal, with progress bars and "bite-sized" task cards.
+
+Make it look like a productivity tool for Vibe Coders!
 ```
 
-Task:
-- Break it into 5–7 AI-friendly prompts.
-- Each prompt must have:
-  - input boundaries (which file / component)
-  - output format (code only / patch / explanation)
-  - acceptance criteria
+---
 
-Expected outcome:
-- A list of 5–7 prompts that could be executed sequentially.
+## 🏗️ The Chunking Strategy
 
-Checklist:
-- [ ] Each chunk is small enough to verify in under 5 minutes
-- [ ] No chunk depends on unstated assumptions
-- [ ] Chunks produce reviewable artifacts (specific files)
+Instead of: "Build a Login System with Database and Email Alerts."
 
-### Exercise B: Chunking a bug
+**Do this instead (The 3-Bite Rule):**
+1.  **Bite 1**: "Build the login UI form using Tailwind CSS." (Check: Does it look right?)
+2.  **Bite 2**: "Connect the form to an in-memory `users` array." (Check: Can I log in?)
+3.  **Bite 3**: "Add a `localStorage` save feature for persistent login." (Check: Does it remember me?)
 
-Bug report:
+---
 
-```text
-My React form sometimes clears itself when I type fast.
-```
+## 🌊 Windsurf Practice: The Incremental Build
 
-Task:
-- Write 3 prompts:
-  1) prompt to gather facts (what to log, what questions to ask)
-  2) prompt to isolate minimal reproduction
-  3) prompt to propose a fix with a rollback plan
+### Step 1: The First Bite
+Ask Windsurf: `"Create a simple 'Task Tracker' UI with just an input and a list."`
+*(Wait for it to finish and run the app.)*
+
+### Step 2: The Second Bite
+Ask Windsurf: `"Now add a 'Delete' button to each task and make it work."`
+*(Wait, run, and verify.)*
+
+### Step 3: The Final Bite
+Ask Windsurf: `"Now add a 'Dark Mode' toggle that saves my preference using LocalStorage."`
+
+#### 💡 Code Breakdown (Why this works):
+- **Incremental Steps**: By waiting for each step, you prevent "Code Rot" (where the AI deletes old code while adding new code).
+- **Verification**: You know exactly when a bug was introduced because you tested it between every "Bite."
+
+---
+
+## Quick practice tasks
+- **Add a "Bite"**: Take a feature you want (like a Search Bar) and break it into 3 smaller tasks.
+- **Refactor Chunk**: Ask the AI to move a piece of code into its own separate file (Bite-sized components).
+- **The "Context" Bite**: Ask Windsurf to "Explain the code you just wrote before we add the next feature."
+
+---
+
+## Checklist
+- [ ] You understand why large prompts lead to "lazy AI" mistakes.
+- [ ] You can break a complex feature into at least 3 smaller chunks.
+- [ ] You have successfully used Windsurf to build an app incrementally.
+- [ ] You know how to verify each "Bite" before moving to the next.
