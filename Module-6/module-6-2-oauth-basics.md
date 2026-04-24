@@ -1,86 +1,110 @@
-# Module 6.2: OAuth 2.0 Basics (The Universal Passport)
+# Module 6.2: OAuth 2.0 Deep Dive (Advanced Security)
 
-### Why (in simple terms)
-Imagine you want to enter a high-security building. Instead of creating a new ID card for that specific building, you show your **National Passport**. The security guard trusts the passport office, sees your photo, and lets you in. 
-
-**OAuth** is the "Passport" of the internet. It lets you use your **GitHub, Google, or Discord** account to log into other apps without ever sharing your password with those apps.
-
-### What you'll learn
-1.  **The OAuth Flow**: How a user, an app, and a provider (like GitHub) talk to each other.
-2.  **Client ID & Secret**: The "License Keys" for your application.
-3.  **Redirect URIs**: Where the user goes after they say "Yes, I want to log in."
-4.  **Access Tokens**: The temporary key given to your app to read user data.
+> **👨‍🎓 Student Guide: Beyond the Basics**
+> **How to approach this Module:**
+> 1. **Prerequisite:** Complete **Module 6.1** (Signup & Login). You should have a working GitHub login before starting here.
+> 2. **The Goal:** This is not about building a new app, but about **peeking under the hood** of how your Module 6.1 app actually works.
+> 3. **The Workflow:** 
+>    - **Understand the Handshake:** Read the technical steps.
+>    - **Visualize:** Use the Lovable prompt to build a visual simulator.
+>    - **Upgrade:** Add advanced security (State) and permissions (Scopes) to your existing server.
 
 ---
 
-## 🎨 Lovable AI Prompt (The OAuth Simulator)
+## ✅ Student Quick Path (10–15 minutes)
 
-*Copy and paste this into [Lovable.ai] to build a visual tool that explains the "Passport" handshake!*
+### Before you start (1 minute)
+- You should already have:
+  - A working backend from **Module 6.1**
+  - GitHub OAuth working (your `/api/auth/github` redirects to GitHub and returns successfully)
+
+### The only 2 ideas you must learn (3 minutes)
+- **Idea 1: Code vs Token**
+  - **Code** = short-lived “exchange coupon” sent to your callback URL
+  - **Token** = the real “key” your server gets after exchanging the code
+- **Idea 2: Secret stays on the server**
+  - If the **Client Secret** appears in the frontend, the app is compromised
+
+### The 10–15 minute flow
+1. **Read the table** (2 minutes)
+   - Read Steps 1–5 out loud: “Redirect → Consent → Code → Swap → Token”.
+2. **Do one safe upgrade: Scopes** (5 minutes)
+   - In your Module 6.1 server, change the GitHub auth route to request email scope:
+     - `scope: ['user:email']`
+   - Remember:
+     - Scopes are permissions
+     - More scope = more access
+     - Ask only what you need
+3. **Optional pro concept: State** (3 minutes)
+   - Learn what `state` is used for (CSRF protection)
+   - You don’t need to fully implement it today, but you should know *why it exists*
+
+### Quick self-check (2 minutes)
+- You can answer:
+  - “What is a code?”
+  - “What is a token?”
+  - “Where should the Client Secret live?”
+
+---
+
+### 🔐 The OAuth "Handshake" (Under the Hood)
+
+In Module 6.1, we used a "Passport" analogy. Now, let's look at the actual technical steps that happen in milliseconds:
+
+| Step | Technical Name | What happens? |
+| :--- | :--- | :--- |
+| **1** | **Authorization Request** | Your app redirects the user to GitHub. |
+| **2** | **User Authorization** | User logs into GitHub and clicks "Authorize". |
+| **3** | **Authorization Grant** | GitHub sends a temporary `code` back to your callback URL. |
+| **4** | **Token Request** | Your server sends that `code` + `Client Secret` back to GitHub. |
+| **5** | **Access Token** | GitHub gives your server a "Key" (Token) to read user data. |
+
+---
+
+## 🛠️ Advanced Lab: Scopes and Permissions
+
+### The Concept of "Scopes"
+Scopes are like permissions on a guest badge. Instead of just seeing who someone is, you might want to see their private repositories or their email.
+
+**Task:** Update your `server.js` from Module 6.1 to request specifically for the user's email.
+
+```js
+// Update your strategy call in server.js
+app.get("/api/auth/github", 
+  passport.authenticate("github", { scope: [ 'user:email' ] })
+);
+```
+
+### Exercise: The "State" Parameter (Security)
+To prevent **CSRF attacks** during the OAuth flow, professionals use a `state` parameter—a unique string that must match when the user comes back.
+
+**Challenge:** Ask Windsurf: `"How do I enable 'state' in my passport-github2 configuration to prevent CSRF attacks?"`
+
+---
+
+## 🎨 Lovable AI Prompt (OAuth Visualizer)
+
+*Use this to build a tool that helps you visualize the 5-step handshake!*
 
 ```text
-Build an "OAuth Flow Visualizer" using React and Tailwind CSS.
-
-Requirements:
-- Layout: Three columns: [The User] <-> [Your App] <-> [GitHub/Google].
-- Interaction:
-  - "Login with GitHub" button starts an animation of a "Request" moving to GitHub.
-  - An "Authorize" button on the GitHub side sends a "Code" back to Your App.
-  - Your App then sends that "Code" for an "Access Token".
-  - Finally, a "Profile Card" appears showing the user's name and photo.
-- Design: Clean, architectural style with dotted connecting lines and glowing data packets.
-
-Make it look like a professional diagram that comes to life!
+Build an "OAuth Handshake Visualizer" using React and Tailwind.
+- Show three pillars: [Client App], [Authorization Server], [Resource Server].
+- Animate a token moving between these pillars as I click "Next Step".
+- Display the 'Code' and 'Access Token' as glowing particles.
+- Include a "Security Warning" if the Client Secret is ever shown on the frontend.
 ```
 
 ---
 
-## 🏗️ The OAuth "Handshake" (Visual Analogy)
-
-| Step | What happens? | The Analogy |
-| :--- | :--- | :--- |
-| **1. Request** | User clicks "Login with GitHub". | "I want to use my GitHub Passport." |
-| **2. Consent** | GitHub asks: "Allow this app to see your email?" | "Do you permit this building to see your Passport?" |
-| **3. Code** | GitHub sends a secret code to your app. | "Here is a temporary slip to give to the desk." |
-| **4. Token** | Your app swaps the code for an Access Token. | "Trading the slip for a temporary building badge." |
-
----
-
-## 🌊 Windsurf Practice: Setting up the Passport Office
-
-### Step 1: Create the Project
-1. Open **Windsurf** terminal and run:
-   ```bash
-   mkdir oauth-lab
-   cd oauth-lab
-   npm init -y
-   npm install express passport passport-github2 dotenv express-session
-   ```
-
-### Step 2: Register your "Building" (App)
-1. Go to **GitHub Settings** -> **Developer Settings** -> **OAuth Apps**.
-2. Click **New OAuth App**.
-3. Set **Authorization callback URL** to: `http://localhost:3000/auth/github/callback`.
-4. Copy your **Client ID** and **Client Secret** into a `.env` file.
-
-### Step 3: Implement the Handshake
-Ask Windsurf: `"Create a server.js using 'passport' and 'passport-github2'. Use the Client ID and Secret from .env to implement a /auth/github route and a callback route that displays the user's GitHub username."`
-
-#### 💡 Code Breakdown (The OAuth Secrets):
-- **`passport.use()`**: This is where we tell our app: "If someone shows a GitHub passport, here is how you verify it."
-- **`scope: ['user:email']`**: This is the "Permission Slip". We are only asking to see the user's email, not their private code!
-- **`callbackURL`**: This is the "Return Address". After GitHub verifies the user, it sends them back here with the secret code.
-
----
-
-## Quick practice tasks
-- **Add Google Login**: Ask Windsurf: "How do I add Google Login using the `passport-google-oauth20` strategy?"
-- **Profile Display**: Update your app to show the user's GitHub profile picture on the home page.
-- **Log Out**: Implement a `/logout` route that clears the session and sends the user back to the login page.
+## 🚀 Pro Challenges
+- **Multiple Providers**: Add Google Login alongside GitHub using `passport-google-oauth20`.
+- **Token Storage**: Instead of just using the token once, research how to save the `accessToken` to a database so you can pull the user's latest repos every time they log in.
+- **Refresh Tokens**: What happens when the "Wristband" expires? Research how "Refresh Tokens" work to get a new one without asking the user to log in again.
 
 ---
 
 ## Checklist
-- [ ] You can explain why OAuth is more secure than asking for passwords.
-- [ ] You know where to find the Client ID and Secret on GitHub/Google.
-- [ ] You understand that the "Callback URL" must match exactly in both the code and the provider settings.
-- [ ] You have successfully displayed a user's name after a "Social Login."
+- [ ] You can explain the difference between an `Authorization Code` and an `Access Token`.
+- [ ] You understand why the `Client Secret` must NEVER be in your frontend code.
+- [ ] You have successfully requested a specific "Scope" from GitHub.
+- [ ] You know how to handle a "Login Cancelled" event.

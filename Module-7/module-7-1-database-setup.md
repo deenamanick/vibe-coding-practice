@@ -445,3 +445,162 @@ UI Design:
 
 Make it look like a professional admin panel for user management!
 ```
+
+### Prompt Variants (choose based on database)
+
+#### A) SQL (PostgreSQL / MySQL) - Banking / E-commerce (strict consistency)
+
+```text
+Build a "SQL Admin Dashboard" UI for Users + Orders.
+
+Backend: http://localhost:3000
+APIs to call:
+- POST /login (email, password) -> token
+- GET /public
+- GET /private (Bearer token)
+- GET /admin (Bearer token)
+
+Show 401 vs 403 clearly with red/green status badges.
+```
+
+#### B) MongoDB - Social / Content (flexible structure)
+
+```text
+Build a "Content Moderation Dashboard" UI for posts/comments.
+
+Backend: http://localhost:3000
+Support flexible JSON fields and show raw JSON for each item.
+Include filters (author, tags) and pagination UI.
+```
+
+#### C) Real-time (Firebase / Redis) - Chat / Live notifications
+
+```text
+Build a "Real-time Activity Dashboard" UI.
+
+Backend: http://localhost:3000
+Show live-updating panels (messages, notifications).
+Include a toggle: "simulate live updates" that polls every 2s using fetch().
+```
+
+#### D) MVP / Startup (SQLite) - fastest local iteration
+
+```text
+Build a "MVP CRUD Dashboard" UI.
+
+Backend: http://localhost:3000
+Focus on quick CRUD screens (create/list/edit/delete) and a simple DB status panel.
+Keep the UI minimal and beginner-friendly.
+```
+
+### After the UI: Windsurf Backend (recommended)
+Ask Windsurf: "Create an Express backend that matches the endpoints used by my UI and connects to my chosen database (PostgreSQL/MySQL/MongoDB/Firebase/SQLite)."
+
+---
+
+## Practical: Make your Database Fast (MySQL + MongoDB)
+
+Pick ONE track below (MySQL or MongoDB). You’ll implement the same performance ideas in both.
+
+### The endpoint we will optimize
+
+Your Lovable dashboard should call a listing API like:
+
+- `GET /users?page=1&limit=20&search=test&fields=id,email,role,created_at`
+
+This one endpoint lets you teach:
+
+- pagination
+- selecting only needed fields
+- indexes (for search/sort)
+- connection pooling
+- caching
+
+---
+
+### 1) Pagination (don’t load everything)
+
+**API behavior**
+
+- Accept `page` and `limit`
+- Return:
+  - `items`
+  - `page`, `limit`
+  - `hasMore` (or `total`)
+
+---
+
+### 2) Query only what you need (no `SELECT *`)
+
+**API behavior**
+
+- Accept a `fields` query param (CSV)
+- Return only fields the UI needs
+
+---
+
+### 3) Indexes (make search/sort fast)
+
+**UI feature to add**
+
+- A search box: `search=` (usually email)
+- A sort dropdown: newest first
+
+#### MySQL: add indexes
+
+```sql
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_users_created_at ON users(created_at);
+```
+
+#### MongoDB: add indexes
+
+```js
+db.users.createIndex({ email: 1 });
+db.users.createIndex({ created_at: -1 });
+```
+
+---
+
+### 4) Connection Pooling (reuse connections)
+
+**Rule for students**
+
+- Create your DB connection/pool ONE time at app startup
+- Do not connect inside every route
+
+#### MySQL (example concept)
+
+- Use a driver that supports pooling (like `mysql2`) and create a pool once
+
+#### MongoDB (example concept)
+
+- Create one `MongoClient` connection once, reuse the db instance
+
+---
+
+### 5) Caching (speed up repeated reads)
+
+Cache only the most requested endpoints:
+
+- `GET /stats` (counts)
+- `GET /users?page=1&limit=20` (first page)
+
+**Simple classroom version (no Redis yet)**
+
+- Use an in-memory cache with a short TTL (10–30s)
+- Invalidate when data changes (create/update/delete)
+
+**Real-world version**
+
+- Use Redis for shared cache
+
+---
+
+## Mini-lab Checklist (what students must demonstrate)
+
+- [ ] Pagination works (`page` + `limit`)
+- [ ] Search works fast after adding an index
+- [ ] Response payload is small because of `fields`
+- [ ] DB connection is created once (pool/client reuse)
+- [ ] Caching makes repeated calls faster (watch timing/logs)

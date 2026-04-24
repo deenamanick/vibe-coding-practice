@@ -20,6 +20,82 @@ You'll add **security guards** (middleware) to your API:
 
 **Don't worry about the code yet** - just follow these steps exactly.
 
+---
+
+## Recommended Lab: `protected-routes-demo`
+
+Open `Module-6/protected-routes-demo/server.js`.
+
+### Step A: Install and run
+
+```bash
+npm init -y
+npm install express jsonwebtoken cors
+node server.js
+```
+
+You should see: `API running on http://localhost:3000`
+
+### Step B: Understand the routes
+
+- `GET /public` (no token needed)
+- `GET /private` (needs token)
+- `GET /admin` (needs token + admin role)
+- `POST /login` (get a token)
+
+### Step C: Test quickly (shows 401 vs 403)
+
+Public works:
+
+```bash
+curl -i http://localhost:3000/public
+```
+
+Private without token (401):
+
+```bash
+curl -i http://localhost:3000/private
+```
+
+Login as user (copy the token):
+
+```bash
+curl -s -X POST http://localhost:3000/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@test.com","password":"1234"}'
+```
+
+Private with token (200):
+
+```bash
+curl -i http://localhost:3000/private \
+  -H "Authorization: Bearer PASTE_TOKEN_HERE"
+```
+
+Admin with user token (403):
+
+```bash
+curl -i http://localhost:3000/admin \
+  -H "Authorization: Bearer PASTE_TOKEN_HERE"
+```
+
+Login as admin (copy the token):
+
+```bash
+curl -s -X POST http://localhost:3000/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@test.com","password":"1234"}'
+```
+
+Admin with admin token (200):
+
+```bash
+curl -i http://localhost:3000/admin \
+  -H "Authorization: Bearer PASTE_ADMIN_TOKEN_HERE"
+```
+
+Tip: Watch your terminal logs to see middleware flow.
+
 ## Step 0: Open your JWT project
 
 1. Open the `jwt-practice` folder from Practical 2
