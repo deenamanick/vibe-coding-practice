@@ -130,7 +130,52 @@ node server.js
 
 ---
 
-## 🎨 Lovable AI Prompt (copy/paste this)
+## ☁️ Bonus: Doing the same with AWS S3 (Presigned URLs)
+
+If you are using AWS S3 instead of Cloudinary, the concept is the same but the implementation uses **Presigned URLs**.
+
+### How it works in AWS:
+1.  **Private Bucket:** Your S3 bucket is set to "Block all public access". No one can see anything by default.
+2.  **IAM Permissions:** Your backend server has permission to read from the bucket.
+3.  **Presigned URL:** Your backend generates a temporary URL that includes a cryptographic signature. Anyone with this URL can view the file until it expires.
+
+### Step-by-Step implementation:
+
+```js
+import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
+const s3Client = new S3Client({ region: "us-east-1" });
+
+// Endpoint to generate a 15-minute secure link
+app.get('/api/s3-document/:key', async (req, res) => {
+  const { key } = req.params;
+
+  try {
+    const command = new GetObjectCommand({
+      Bucket: process.env.S3_BUCKET_NAME,
+      Key: key,
+    });
+
+    // Generate the URL (expires in 900 seconds = 15 minutes)
+    const signedUrl = await getSignedUrl(s3Client, command, { expiresIn: 900 });
+
+    res.json({
+      message: "AWS Secure Link generated!",
+      url: signedUrl
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+```
+
+### Why use this?
+- **Security:** The file never becomes "Public". The link is the only way in.
+- **Control:** You can set the expiration to be as short as 1 minute.
+- **Privacy:** Perfect for sensitive data like ID cards, medical records, or paid content.
+
+---
 
 ```text
 Build a "Secure Document Vault" UI.
