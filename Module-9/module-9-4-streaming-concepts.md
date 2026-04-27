@@ -113,19 +113,69 @@ Visit: `http://localhost:3000/api/chat/stream?prompt=Write a short story about a
 
 ---
 
-## 🎨 Lovable AI Prompt (copy/paste this)
+## 🛠️ Practice Session: UI Integration (The Magic Typewriter)
+
+To show the streaming text in your Lovable UI, you need to use the `EventSource` API. This is the "receiver" for the data chunks your server is sending.
+
+**Frontend logic for your "Start Story" button:**
+```javascript
+const eventSource = new EventSource(`http://localhost:3000/api/chat/stream?prompt=${userInput}`);
+
+eventSource.onmessage = (event) => {
+  if (event.data === "[DONE]") {
+    eventSource.close();
+    return;
+  }
+  
+  const data = JSON.parse(event.data);
+  // Append the new chunk to your existing story text
+  setStoryText((prev) => prev + data.content);
+};
+
+eventSource.onerror = () => {
+  console.error("Streaming failed");
+  eventSource.close();
+};
+```
+
+---
+
+## 🚀 Advanced: Streaming with POST (Fetch API)
+
+While `EventSource` is easy for `GET` requests, real apps often use `POST` for security. You can do this using **ReadableStreams** with the Fetch API:
+
+```javascript
+const response = await fetch("http://localhost:3000/api/chat/stream", {
+  method: "POST",
+  body: JSON.stringify({ prompt: userInput }),
+  headers: { "Content-Type": "application/json" }
+});
+
+const reader = response.body.getReader();
+const decoder = new TextDecoder();
+
+while (true) {
+  const { done, value } = await reader.read();
+  if (done) break;
+  const chunk = decoder.decode(value);
+  // Handle the text chunk here...
+}
+```
+
+---
+
+## 🎨 Lovable AI Prompt (Updated)
 
 ```text
-Build a "Real-time AI Storyteller" UI.
+Build a "Real-time AI Storyteller" that connects to our Backend Stream.
 
 Requirements:
-- A text area: "What kind of story should I write?".
-- A "Start Story" button.
-- When clicked, use EventSource to connect to http://localhost:3000/api/chat/stream.
-- Display the story word-by-word as it arrives.
-- Add a "Typewriter" sound effect (optional but cool!).
-- A "Stop" button to cancel the stream.
-- Use a "Fantasy" or "Retro Typewriter" theme (parchment background, classic fonts).
+- Input: A "Theme" dropdown (Sci-Fi, Horror, Fairytale) and a "Custom Twist" text input.
+- Button: "Invoke the Storyteller" (connects to GET http://localhost:3000/api/chat/stream).
+- Canvas: A large, vintage-styled paper area where the story appears.
+- Real-time logic: Use EventSource to update the UI word-by-word. 
+- Typewriter Effect: Ensure the scroll stays at the bottom as text arrives.
+- Finish State: When the stream ends, show a "The End" wax seal icon.
 
-Make it look like a magical typewriter that writes itself!
+Style: Dark academia, flickering candle animations, and ink-bleed text effects.
 ```

@@ -118,21 +118,43 @@ curl -X POST http://localhost:3000/api/recipe/generate \
 
 ---
 
-## 🎨 Lovable AI Prompt (copy/paste this)
+## 🛠️ Practice Session: UI Integration
+
+When you use the Lovable prompt below, your frontend will receive a **JSON object**, not just text. You need to map these fields to your UI components.
+
+**Frontend logic for your "Generate" button:**
+```javascript
+const response = await fetch("http://localhost:3000/api/recipe/generate", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ dishName: userInput })
+});
+
+const result = await response.json();
+
+if (result.success) {
+  // result.data will look like: 
+  // { dish: "...", ingredients: [...], steps: [...] }
+  setRecipe(result.data); 
+}
+```
+
+---
+
+## 🎨 Lovable AI Prompt (Updated)
 
 ```text
-Build a "Chef's Smart Recipe Card" UI.
+Build a "Chef's Smart Recipe Card" that integrates with our Backend JSON API.
 
 Requirements:
-- A search bar: "What do you want to cook today?".
-- A "Generate Recipe" button.
-- When clicked, call POST http://localhost:3000/api/recipe/generate.
-- Display the result as a beautiful recipe card:
-  - Dish title at the top.
-  - Ingredients in a bulleted list with checkboxes.
-  - Steps in a numbered "Checklist" format.
-- Add a "Print Recipe" button.
-- Use a "Kitchen-themed" design (warm colors, food icons, paper texture).
+- Search: A prominent input for "What do you want to cook today?".
+- Button: "Generate Magic Recipe" (calls POST http://localhost:3000/api/recipe/generate).
+- Interactive Card:
+  1. Title: Large serif font for the dish name.
+  2. Ingredients: A list with custom checkboxes. When checked, the text should strike through.
+  3. Instructions: A vertical timeline or numbered list of steps.
+- Data Handling: Parse the JSON response `{ dish, ingredients, steps }` and map it to the UI elements.
+- Features: Add a "Shopping List Mode" that highlights only the ingredients.
+- Style: Culinary aesthetic (cream background, olive green accents, hand-drawn food icons).
 
-Make it look like a high-end cooking blog or a recipe book app!
-```
+Handle loading states with a "Chef is cooking..." animation.

@@ -67,7 +67,18 @@ function findRelevantKnowledge(query) {
   return matches.sort((a, b) => b.score - a.score)[0].text;
 }
 
-// 3. The RAG Endpoint
+// 3. Optimization Helpers (from caching-standards.md)
+function pickModel(prompt) {
+  // Simple tasks like FAQ retrieval are routed to faster, cheaper models
+  return prompt.length < 200 ? 'llama3-8b-8192' : 'llama3-70b-8192';
+}
+
+function getMaxTokens(taskType) {
+  const limits = { classify: 10, summarize: 200, chat: 500 };
+  return limits[taskType] || 500;
+}
+
+// 4. The RAG Endpoint
 app.post('/api/rag/ask', async (req, res) => {
   const { question } = req.body;
 
@@ -78,25 +89,25 @@ app.post('/api/rag/ask', async (req, res) => {
     const knowledge = findRelevantKnowledge(question);
     console.log(`Found relevant info: "${knowledge}"`);
 
-    // STEP B: GENERATE the answer using AI
+    // STEP B: GENERATE the answer using AI with standard optimizations
     const completion = await groq.chat.completions.create({
       messages: [
         { 
           role: "system", 
-          content: `You are a helpful HR assistant. Use ONLY the following information to answer the user's question. 
-                   If the answer is not in the information, say "I'm sorry, I don't have that information."
-                   
-                   INFORMATION: ${knowledge}` 
+          content: `HR Assistant. Answer based ONLY on context. If unknown, say "I don't know".` // Lean System Prompt
         },
+        { role: "system", content: `CONTEXT: ${knowledge}` },
         { role: "user", content: question }
       ],
-      model: "llama3-8b-8192",
+      model: pickModel(question), // Intelligent Routing
+      max_tokens: getMaxTokens('chat') // Output Token Capping
     });
 
     res.json({
       question: question,
       answer: completion.choices[0].message.content,
-      source_used: knowledge
+      source_used: knowledge,
+      model_used: completion.model
     });
   } catch (error) {
     console.error("❌ RAG Error:", error.message);

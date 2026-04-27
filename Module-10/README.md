@@ -8,6 +8,8 @@ This module teaches you how to give AI a "long-term memory" using RAG. You'll le
 - `module-10-2-what-is-embeddings.md` — What are Embeddings? (Turning text into numbers)
 - `module-10-3-vector-database-concept.md` — Vector Database concept (Storing and searching memories)
 - `module-10-4-basic-document-qa.md` — Project: Basic Document Q&A System
+- `module-10-5-caching-llm-responses.md` — Optimization: Redis Caching & Token Saving
+- `module-10-6-production-sentiment-upgrade.md` — Project Upgrade: Real Google Reviews with Groq
 
 ### Recommended order
 
@@ -15,6 +17,8 @@ This module teaches you how to give AI a "long-term memory" using RAG. You'll le
 2. What are Embeddings?
 3. Vector Database concept
 4. Basic Document Q&A System
+5. Optimization: Response Caching
+6. Production-Grade Sentiment Upgrade
 
 ### Prerequisites
 

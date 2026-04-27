@@ -64,16 +64,21 @@ async function runTest() {
   // 2. A very long "distraction" text (simulating a long book)
   const distraction = "This is a very long text about history... ".repeat(100);
 
+  // Optimization Helpers (from caching-standards.md)
+  const pickModel = (p) => p.length < 200 ? 'llama3-8b-8192' : 'llama3-70b-8192';
+  const getMaxTokens = (type) => ({ chat: 500, summarize: 200 }[type] || 500);
+
   console.log("--- Testing 'Normal' Chat (might forget) ---");
   try {
     const chat = await groq.chat.completions.create({
       messages: [
-        { role: "system", content: "You are a helpful assistant." },
+        { role: "system", content: "Assistant. Be concise." }, // Lean System Prompt
         { role: "user", content: secret },
         { role: "user", content: distraction },
         { role: "user", content: "What was the secret password I told you at the beginning?" }
       ],
-      model: "llama3-8b-8192",
+      model: pickModel(distraction), // Intelligent Routing (will pick larger model for long text)
+      max_tokens: getMaxTokens('chat') // Output Token Capping
     });
     console.log("AI Answer:", chat.choices[0].message.content);
   } catch (e) {
@@ -85,10 +90,11 @@ async function runTest() {
   const relevantInfo = secret; 
   const ragChat = await groq.chat.completions.create({
     messages: [
-      { role: "system", content: `Use this info to answer: ${relevantInfo}` },
+      { role: "system", content: `Use this info to answer: ${relevantInfo}` }, // Lean Prompt
       { role: "user", content: "What was the secret password?" }
     ],
-    model: "llama3-8b-8192",
+    model: pickModel(relevantInfo), // Intelligent Routing (will pick smaller model for short text)
+    max_tokens: getMaxTokens('chat') // Output Token Capping
   });
   console.log("RAG Answer:", ragChat.choices[0].message.content);
 }
@@ -124,15 +130,19 @@ node memory-test.js
 ## 🎨 Lovable AI Prompt (copy/paste this)
 
 ```text
-Build a "Context Window Visualizer".
+Build a "Context Window Visualizer" UI.
 
-Requirements:
-- A box representing the "AI's Brain" (the context window).
-- A text input to add "Information Blocks".
-- As I add blocks, show them filling up the box.
-- When the box is full, the oldest blocks should "fall out" or fade away.
-- Add a separate "Library" section (RAG).
-- When I search for a word, show a "Beam of Light" pulling the correct block from the Library into the AI's Brain.
+Frontend Requirements:
+- A high-tech "Library of the Future" design with neon colors and smooth animations.
+- A main area representing the "AI's Brain" (the context window).
+- A text input to add "Information Blocks" to the brain.
+- Visualize blocks filling up the brain; oldest blocks should "fall out" or fade when capacity is reached.
+- A separate "Knowledge Library" section (RAG concept).
+- When I search for a term, show a "Beam of Light" pulling the relevant block from the Library into the Brain.
+- Interaction: Clicking a "Fetch Knowledge" button should call a POST /api/chat endpoint.
 
-Make it look like a futuristic educational tool with neon colors and smooth animations!
+Backend (Mock Requirements for Lovable):
+- Define a basic Express POST /api/chat endpoint structure.
+- Expecting a JSON response with { "reply": "...", "source": "..." }.
+- (Note: The full optimized backend with Groq will be built separately in Windsurf).
 ```

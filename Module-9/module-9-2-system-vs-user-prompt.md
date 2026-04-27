@@ -30,7 +30,7 @@ You'll create a "Persona Switcher" that:
 
 ## Step 1: Create the Persona Switcher API
 
-Update `server.js` and add this new endpoint:
+Update `server.js` and add this new endpoint. Notice how we pass an **array** of messages to Groq, where each object has a `role` and `content`.
 
 ```js
 // 1. Persona Switcher Endpoint
@@ -40,13 +40,22 @@ app.post('/api/persona/chat', async (req, res) => {
   if (!userPrompt) return res.status(400).json({ error: "User Prompt is required" });
 
   try {
+    // UNDERSTANDING ROLES:
+    // system: The instructions/identity (The "Brain")
+    // user:   The actual message from a human (The "Input")
+    
     console.log(`Setting Persona: ${systemPrompt || 'Default'}`);
     
-    // Call the Groq API with System AND User messages
     const completion = await groq.chat.completions.create({
       messages: [
-        { role: "system", content: systemPrompt || "You are a helpful assistant." },
-        { role: "user", content: userPrompt }
+        { 
+          role: "system", 
+          content: systemPrompt || "You are a helpful assistant." 
+        },
+        { 
+          role: "user", 
+          content: userPrompt 
+        }
       ],
       model: "llama3-8b-8192",
     });
@@ -58,7 +67,7 @@ app.post('/api/persona/chat', async (req, res) => {
       response: aiResponse
     });
   } catch (error) {
-    console.error("❌ Persona Error:", error.message);
+    console.error(" Persona Error:", error.message);
     res.status(500).json({ error: "Failed to get Persona response" });
   }
 });
@@ -116,18 +125,38 @@ curl -X POST http://localhost:3000/api/persona/chat \
 
 ---
 
-## 🎨 Lovable AI Prompt (copy/paste this)
+## 🛠️ Practice Session: UI Integration
+
+When you use the Lovable prompt below, remember to connect your **Fetch** call to this new `/api/persona/chat` endpoint.
+
+**Frontend logic for your button:**
+```javascript
+const response = await fetch("http://localhost:3000/api/persona/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    systemPrompt: selectedPersonaContent,
+    userPrompt: userInput
+  })
+});
+```
+
+---
+
+## 🎨 Lovable AI Prompt (Updated)
 
 ```text
-Build a "Persona Playground" UI.
+Build a "Persona Playground" that connects to our Backend API.
 
 Requirements:
-- A dropdown to choose pre-set personas (Pirate, Teacher, Doctor, Robot).
-- A custom text area for the "System Prompt" (auto-filled by the dropdown).
-- A text area for the "User Question".
-- A "Chat" button.
-- Display the AI response in a "Speech Bubble" styled for that persona.
-- Add a "Persona Card" showing the current identity.
+- Header: Input for "GROQ_API_KEY" (needed if calling Groq directly, or leave for backend).
+- Sidebar: Cards for different Personas (Pirate, Tech Support, Yoda, Gordon Ramsay).
+- Main Area: 
+  1. A "System Prompt" preview box (shows the current persona instructions).
+  2. A "User Message" input area.
+  3. A "Send" button that calls "POST http://localhost:3000/api/persona/chat".
+- Chat Display: Use speech bubbles. Left side for User, Right side for AI.
+- Animations: Add a loading spinner while waiting for the AI response.
 
-Make it look like a fun, creative role-playing game interface!
+Style: Vibrant, high-contrast UI with a creative character-based theme.
 ```
