@@ -8,6 +8,8 @@ Imagine you're sending a postcard through the mail. Anyone who touches that post
 - Data sent over HTTP is like a postcard. It's "Plain Text".
 - If you're on public Wi-Fi (like at Starbucks), a hacker can "sniff" the air and see your passwords, credit card numbers, and private chats.
 
+**The Real-World Risk**: Without HTTPS, any data you send can be stolen by anyone on the same network. This is why you **never** enter passwords on a website that doesn't have the padlock.
+
 **The Solution: HTTPS (HTTP Secure)**
 - HTTPS is like putting your message in a **Locked Steel Box**.
 - Only you and the website have the key.
@@ -95,20 +97,52 @@ node https-scanner.js
 
 ---
 
-## 🎨 Lovable AI Prompt (copy/paste this)
+## 🎨 Lovable AI Prompt (UI Generation)
 
 ```text
-Build an "HTTPS Connection Visualizer".
+Build an "HTTPS Connection Visualizer" UI.
 
-Requirements:
-- A "User" on the left and a "Server" on the right.
-- A "Data Packet" (box) that moves between them.
-- A "Hacker" (shadowy figure) in the middle.
-- A toggle switch: "HTTP" vs "HTTPS".
-- In HTTP mode: The packet is transparent, and the hacker smiles.
-- In HTTPS mode: The packet is a "Locked Safe", and the hacker looks frustrated.
-- Add a "Green Padlock" that lights up in HTTPS mode.
-- Use a "Secure/Networking" theme (blue lines, glowing nodes).
+Frontend Requirements:
+- A high-tech "Network Security Map" with glowing blue lines and nodes.
+- Layout: A "User" icon on the left and a "Server" icon on the right.
+- Animation: A "Data Packet" (box) that moves between User and Server.
+- A "Hacker" (shadowy figure) in the middle of the network path.
+- Toggle Switch: "Connection Mode: HTTP (Unsecured) / HTTPS (Secured)".
+- Visual States:
+    - HTTP Mode: The packet is transparent. When it passes the hacker, show the raw text inside (e.g., "password123"). The hacker smiles.
+    - HTTPS Mode: The packet transforms into a "Locked Steel Safe". A green padlock icon lights up. The hacker looks frustrated because they see only "gibberish code".
+- Interaction: Clicking "Send Data" should call a POST /api/network/simulate endpoint.
 
-Make it look like a high-tech network security map!
+Integration Specs (Mock for Lovable):
+- Expecting a POST /api/network/simulate endpoint.
+- Request body: { "mode": "http" | "https", "data": "..." }
+- Response structure: { "hackerSees": "...", "serverSees": "...", "isEncrypted": true }
+
+(Note: You are building the FRONTEND only. The actual encryption simulation and network logic will be handled via Windsurf.)
 ```
+
+---
+
+## 🛠️ Windsurf Integration Guide: Connecting UI to Network Simulation
+
+Once your "Network Visualizer" UI is ready, use **Windsurf** to power it with the `https-scanner.js` logic.
+
+### 1. Export from Lovable
+Open your downloaded Lovable project in **Windsurf**.
+
+### 2. Connect the Simulation Engine
+Update your frontend to talk to your local server to show real-time encryption:
+
+```javascript
+const handleSendData = async (mode, rawData) => {
+  const response = await fetch('http://localhost:3000/api/network/simulate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ mode, data: rawData })
+  });
+  const data = await response.json();
+  // Update UI to show what the hacker intercepted vs what the server received
+};
+```
+
+This turns your animation into a powerful teaching tool for web security!

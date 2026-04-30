@@ -102,19 +102,51 @@ node hash-demo.js
 
 ---
 
-## 🎨 Lovable AI Prompt (copy/paste this)
+## 🎨 Lovable AI Prompt (UI Generation)
 
 ```text
-Build a "Password Hashing Visualizer".
+Build a "Password Hashing Visualizer" UI.
 
-Requirements:
+Frontend Requirements:
+- A high-tech "Security Vault" design with cyberpunk colors (dark, neon green).
 - A text input: "Enter a password".
 - A big "Hash It!" button.
 - Below, show the "Plain Text" and the "Secure Hash" side-by-side.
 - Add a "Meat Grinder" animation that plays when hashing.
 - A second section: "Test Login".
 - Input a password to see if it matches the hash above.
-- Use a "Security/Cyberpunk" theme (dark background, green text, lock icons).
+- Integration: Clicking "Hash It!" should call a POST /api/hash endpoint.
 
-Make it look like a hacker's terminal or a high-tech security vault!
+Integration Specs (Mock for Lovable):
+- Expecting a POST /api/hash endpoint.
+- Request body: { "password": "..." }
+- Response structure: { "hash": "..." }
+
+(Note: You are building the FRONTEND only. The actual hashing logic and Bcrypt integration will be handled via Windsurf in the next step.)
 ```
+
+---
+
+## 🛠️ Windsurf Integration Guide: Connecting UI to Secure Hashing
+
+Once your "Security Vault" UI is ready, use **Windsurf** to power it with the `hash-demo.js` logic.
+
+### 1. Export from Lovable
+Open your downloaded Lovable project in **Windsurf**.
+
+### 2. Connect the Hashing Engine
+Update your frontend to talk to your local hashing server:
+
+```javascript
+const handleHash = async (password) => {
+  const response = await fetch('http://localhost:3000/api/hash', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password: password })
+  });
+  const data = await response.json();
+  // Update your UI state with data.hash
+};
+```
+
+This transforms your UI from a simple animation into a functional **Security Dashboard**!

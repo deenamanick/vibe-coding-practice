@@ -9,6 +9,8 @@ Imagine you have a "Gold Card" that gives you free access to any store. If you l
 - If you put them directly in your code (`const key = "gsk_123456789"`), and you upload that code to GitHub, the **whole world** can see it.
 - Bots crawl GitHub every second looking for these keys. Within minutes, a hacker could use up your entire AI budget!
 
+**The Real-World Leak**: Companies have lost thousands of dollars in minutes because a developer accidentally pushed a key to a public repository.
+
 **The Solution: Environment Variables (.env)**
 - You keep your keys in a separate "Secret File" named `.env`.
 - You tell Git to **ignore** this file so it never leaves your computer.
@@ -116,19 +118,52 @@ node secret-keeper.js
 
 ---
 
-## 🎨 Lovable AI Prompt (copy/paste this)
+## 🎨 Lovable AI Prompt (UI Generation)
 
 ```text
-Build a "Secret Key Vault" UI.
+Build a "Security Audit & Key Vault" UI.
 
-Requirements:
-- A "Vault Door" that is locked.
-- A section to input my API Keys (don't show the characters - use password type).
-- A "Lock Vault" button.
-- When clicked, show an animation of the key being "Hidden" in a .env file.
-- A "Check Safety" button that tells me if my .gitignore is set up correctly.
-- Add a "Warning" alert if any key is visible in plain text.
-- Use a "Secure Vault/Bank" theme (gold, black, metallic textures).
+Frontend Requirements:
+- A high-security "Command Center" dashboard with gold and metallic textures.
+- A "Vault Status" indicator: Changes from a red "UNSECURED" to a green "SECURED" state.
+- A section to input multiple API Keys (use password masking).
+- A "Lock Vault" button that triggers a "Securing Data..." progress bar.
+- A "Security Audit" panel:
+    - Checks if any keys are accidentally written in the "Public Chat" area.
+    - Shows a "Shield Strength" meter that increases as keys are moved to the vault.
+- A "Check Safety" button that simulates scanning a .gitignore file.
+- Integration: Clicking "Lock Vault" should call a POST /api/secrets/save endpoint.
 
-Make it look like a high-security digital safe for my app's secrets!
+Integration Specs (Mock for Lovable):
+- Expecting a POST /api/secrets/save endpoint.
+- Request body: { "key": "...", "value": "..." }
+- Response structure: { "status": "secured", "path": ".env", "auditScore": 100 }
+
+(Note: You are building the FRONTEND only. The actual file writing, environment variable management, and local security logic will be handled via Windsurf.)
 ```
+
+---
+
+## 🛠️ Windsurf Integration Guide: Connecting UI to Secret Storage
+
+Once your "Secret Vault" UI is ready, use **Windsurf** to power it with the `secret-keeper.js` logic.
+
+### 1. Export from Lovable
+Open your downloaded Lovable project in **Windsurf**.
+
+### 2. Connect the Secret Engine
+Update your frontend to talk to your local backend which handles `.env` files:
+
+```javascript
+const handleSaveSecret = async (key, value) => {
+  const response = await fetch('http://localhost:3000/api/secrets/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ key, value })
+  });
+  const data = await response.json();
+  // Show a success message if data.status === "secured"
+};
+```
+
+This ensures your keys move safely from the UI into a protected local file!

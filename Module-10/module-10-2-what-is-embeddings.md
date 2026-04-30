@@ -163,18 +163,49 @@ node embedding-test.js
 
 ---
 
-## 🎨 Lovable AI Prompt (copy/paste this)
+## 🎨 Lovable AI Prompt (UI Generation)
 
 ```text
-Build an "AI Meaning Map" (Embedding Visualizer).
+Build an "AI Meaning Map" (Embedding Visualizer) UI.
 
-Requirements:
-- A blank 2D canvas (The "AI Space").
+Frontend Requirements:
+- A blank 2D canvas representing "AI Space" (a floating galaxy with gravity effects).
 - An input box to "Add a word".
-- When I add a word, show it as a "Glowing Point" on the map.
+- When a word is added, it appears as a "Glowing Point" on the map.
 - Words with similar meanings (like "Happy" and "Joyful") should fly towards each other.
-- Words with different meanings (like "Happy" and "Bicycle") should stay far apart.
-- When I hover over a point, show its "Coordinates" (simulated vector).
+- Words with different meanings should stay far apart.
+- Hovering over a point shows its "Coordinates" (simulated vector).
+- Integration: Sending a word should call a POST /api/embeddings/compare endpoint.
 
-Make it look like a floating galaxy of words with cool gravity effects!
+Integration Specs (Mock for Lovable):
+- Expecting a POST /api/embeddings/compare endpoint.
+- Response structure: { "similarity": 0.95, "coordinates": [x, y] }
+
+(Note: You are building the FRONTEND only. The actual similarity logic and vector calculations will be handled via Windsurf.)
 ```
+
+---
+
+## 🛠️ Windsurf Integration Guide: Connecting UI to Meaning
+
+Once your "Meaning Map" UI is ready, use **Windsurf** to power it with the `embedding-test.js` logic.
+
+### 1. Export from Lovable
+Open your downloaded Lovable project in **Windsurf**.
+
+### 2. Connect the "Meaning" Engine
+Update your frontend to talk to your local embedding server:
+
+```javascript
+const addWordToMap = async (word) => {
+  const response = await fetch('http://localhost:3000/api/embeddings/compare', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ word: word })
+  });
+  const data = await response.json();
+  // Use data.similarity and data.coordinates to position the point in the UI
+};
+```
+
+This transforms your UI from a simple animation into a functional **Semantic Search** visualization!

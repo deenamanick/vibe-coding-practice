@@ -127,19 +127,59 @@ curl -X POST http://localhost:3000/api/comment/safe \
 
 ---
 
-## 🎨 Lovable AI Prompt (copy/paste this)
+## 🎨 Lovable AI Prompt (UI Generation)
 
 ```text
-Build an "Input Security Dashboard".
+Build a "Malicious Input Playground" UI.
 
-Requirements:
+Frontend Requirements:
+- A professional "Content Moderation Dashboard" with white and blue theme.
 - A "Comment Form" with Email and Message fields.
-- A toggle: "Security Mode: ON/OFF".
-- When Security is OFF: Allow any input (show a warning icon ⚠️).
-- When Security is ON: Highlight any malicious tags (like <script>) in red.
-- Show a "Sanitized Preview" of the text below the form.
-- Use a "Security/Clean" theme (white, blue, checkmark icons).
-- Add a "Safe to Save" badge that only appears when validation passes.
+- A "Security Mode" toggle: ON (Secure) / OFF (Dangerous).
+- When Security is ON:
+    - Real-time highlighting of malicious tags (e.g., <script>, DROP TABLE) in red.
+    - A "Sanitized Preview" area showing how the text will be "cleaned" (escaped).
+    - A "Shield Level" meter that shows 100% when input is clean.
+- When Security is OFF:
+    - Show a pulsing "Vulnerable" warning icon ⚠️.
+    - Show a "Live Preview" where code tags look like they would actually execute.
+- Integration: Submitting should call a POST /api/comment/safe endpoint.
 
-Make it look like a professional content moderation tool!
+Integration Specs (Mock for Lovable):
+- Expecting a POST /api/comment/safe endpoint.
+- Request body: { "email": "...", "comment": "..." }
+- Response structure: { "message": "...", "comment": "...", "isSafe": true }
+
+(Note: You are building the FRONTEND only. The actual validation, sanitization, and regex logic will be handled via Windsurf.)
 ```
+
+---
+
+## 🛠️ Windsurf Integration Guide: Connecting UI to Input Validation
+
+Once your "Input Security Dashboard" UI is ready, use **Windsurf** to power it with the `secure-form.js` logic.
+
+### 1. Export from Lovable
+Open your downloaded Lovable project in **Windsurf**.
+
+### 2. Connect the Validation Engine
+Update your frontend to talk to your local secure server:
+
+```javascript
+const handleSubmit = async (email, comment) => {
+  const response = await fetch('http://localhost:3000/api/comment/safe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, comment })
+  });
+  const data = await response.json();
+  
+  if (response.ok) {
+    // Show data.message and data.comment (sanitized)
+  } else {
+    // Show validation errors from data.errors
+  }
+};
+```
+
+This ensures every piece of data entering your app is cleaned and verified!

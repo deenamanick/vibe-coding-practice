@@ -180,12 +180,12 @@ curl -X POST http://localhost:3000/api/rag/ask \
 
 ---
 
-## 🎨 Lovable AI Prompt (copy/paste this)
+## 🎨 Lovable AI Prompt (UI Generation)
 
 ```text
 Build a "Smart HR Support Bot" UI.
 
-Requirements:
+Frontend Requirements:
 - A chat interface: "Ask me about company policies...".
 - When I ask a question, show a "Searching Handbook..." animation.
 - Display the AI response in a "Support Agent" bubble.
@@ -194,5 +194,48 @@ Requirements:
 - Use a "Professional Office" theme (blues, greys, clean typography).
 - Add a "Feedback" thumb up/down for each answer.
 
-Make it look like a real corporate HR portal!
+Integration Specs (Mock for Lovable):
+- Expecting a POST /api/rag/ask endpoint.
+- Request body: { "question": "..." }
+- Response structure: { "answer": "...", "source_used": "..." }
+
+(Note: You are building the FRONTEND only. The actual LLM logic and Groq integration will be handled via Windsurf in the next step.)
 ```
+
+---
+
+## 🛠️ Windsurf Integration Guide: Connecting UI to Backend
+
+Once you have your beautiful UI from Lovable, it's time to make it "smart" using the Node.js backend you built in Step 1.
+
+### 1. Export from Lovable
+Download your Lovable project and open it in **Windsurf**.
+
+### 2. Connect the API
+In your React/Frontend code (usually in a `Chat` or `App` component), find the function that handles sending messages. Update the `fetch` call to point to your local server:
+
+```javascript
+const handleSendMessage = async (userQuestion) => {
+  // 1. Call your local Node.js server
+  const response = await fetch('http://localhost:3000/api/rag/ask', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ question: userQuestion })
+  });
+
+  const data = await response.json();
+
+  // 2. Update the UI with the real answer from Groq
+  setMessages([...messages, { 
+    text: data.answer, 
+    sender: 'bot', 
+    source: data.source_used 
+  }]);
+};
+```
+
+### 3. Run Both
+- Start your **Backend**: `node server.js` (Port 3000)
+- Start your **Frontend**: `npm run dev` (Port 5173)
+
+Now, your professional UI is officially powered by your custom RAG logic!

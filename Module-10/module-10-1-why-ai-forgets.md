@@ -127,7 +127,7 @@ node memory-test.js
 
 ---
 
-## 🎨 Lovable AI Prompt (copy/paste this)
+## 🎨 Lovable AI Prompt (UI Generation)
 
 ```text
 Build a "Context Window Visualizer" UI.
@@ -141,8 +141,37 @@ Frontend Requirements:
 - When I search for a term, show a "Beam of Light" pulling the relevant block from the Library into the Brain.
 - Interaction: Clicking a "Fetch Knowledge" button should call a POST /api/chat endpoint.
 
-Backend (Mock Requirements for Lovable):
-- Define a basic Express POST /api/chat endpoint structure.
-- Expecting a JSON response with { "reply": "...", "source": "..." }.
-- (Note: The full optimized backend with Groq will be built separately in Windsurf).
+Integration Specs (Mock for Lovable):
+- Expecting a POST /api/chat endpoint.
+- Request body: { "prompt": "..." }
+- Response structure: { "reply": "..." }
+
+(Note: You are building the FRONTEND only. The actual LLM logic and Groq integration will be handled via Windsurf in the next step.)
 ```
+
+---
+
+## 🛠️ Windsurf Integration Guide: Connecting UI to Backend
+
+After creating your UI in Lovable, follow these steps in **Windsurf** to connect it to your `memory-test.js` logic.
+
+### 1. Export from Lovable
+Download the project from Lovable and open the folder in **Windsurf**.
+
+### 2. Connect the API
+Find the chat handling function in your React code and update it to call your local server:
+
+```javascript
+const handleChat = async (input) => {
+  const response = await fetch('http://localhost:3000/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt: input })
+  });
+  const data = await response.json();
+  // Update your UI state with data.reply
+};
+```
+
+### 3. Run Your Optimized Backend
+Use the logic from Step 3 to create a server that uses the **9 Optimization Pillars** (Caching, Routing, etc.) to keep your app fast and cheap!
