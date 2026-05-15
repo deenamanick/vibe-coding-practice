@@ -10,6 +10,12 @@ Imagine you're sending a postcard through the mail. Anyone who touches that post
 
 **The Real-World Risk**: Without HTTPS, any data you send can be stolen by anyone on the same network. This is why you **never** enter passwords on a website that doesn't have the padlock.
 
+### ❌ Common Mistakes
+
+- ❌ Entering passwords on HTTP sites (no padlock icon)
+- ❌ Ignoring browser "Not Secure" warnings
+- ❌ Sending API keys over unencrypted connections
+
 **The Solution: HTTPS (HTTP Secure)**
 - HTTPS is like putting your message in a **Locked Steel Box**.
 - Only you and the website have the key.
@@ -50,15 +56,33 @@ function simulateNetwork() {
     console.log(`Sending: ${data}`);
     console.log(`Hacker sees: "${data}" (OH NO! Stolen!)`);
 
-    // 2. Simulating HTTPS (Secured)
+    // 2. Simulating HTTPS (Secured) with REAL encryption
     console.log("\n[HTTPS - Secured Steel Box]");
     
-    // In real life, the browser does this automatically!
-    const encryptedData = "x8!2#zP9$Lq7*Mv1"; 
+    const crypto = require('crypto');
+    const algorithm = 'aes-256-cbc';
+    const key = crypto.randomBytes(32);
+    const iv = crypto.randomBytes(16);
+    
+    function encrypt(text) {
+        const cipher = crypto.createCipheriv(algorithm, key, iv);
+        let encrypted = cipher.update(text, 'utf8', 'hex');
+        encrypted += cipher.final('hex');
+        return encrypted;
+    }
+    
+    function decrypt(encrypted) {
+        const decipher = crypto.createDecipheriv(algorithm, key, iv);
+        let decrypted = decipher.update(encrypted, 'hex', 'utf8');
+        decrypted += decipher.final('utf8');
+        return decrypted;
+    }
+    
+    const encryptedData = encrypt(data);
     
     console.log(`Sending: ${encryptedData}`);
     console.log(`Hacker sees: "${encryptedData}" (Useless gibberish!)`);
-    console.log("Website decodes it back to: MySecretPassword123");
+    console.log(`Website decodes it back to: ${decrypt(encryptedData)}`);
 }
 
 simulateNetwork();
@@ -118,7 +142,7 @@ Integration Specs (Mock for Lovable):
 - Request body: { "mode": "http" | "https", "data": "..." }
 - Response structure: { "hackerSees": "...", "serverSees": "...", "isEncrypted": true }
 
-(Note: You are building the FRONTEND only. The actual encryption simulation and network logic will be handled via Windsurf.)
+(Note: You are building the FRONTEND only. The actual encryption/decryption logic using Node.js crypto will be handled via Windsurf.)
 ```
 
 ---

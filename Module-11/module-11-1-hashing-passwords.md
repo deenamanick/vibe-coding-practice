@@ -14,6 +14,12 @@ Hashing is like putting a password through a "meat grinder."
 - You **cannot** turn the ground meat back into the original cow.
 - When a user logs in, you "grind" their input and see if it matches the "ground meat" in your database.
 
+### ❌ Common Mistakes
+
+- ❌ Storing plain text: `password: "123456"` in database
+- ❌ Weak hashing: Using MD5 or SHA1 (too fast, easily cracked)
+- ❌ No salt: Same password = same hash across all users
+
 ### What you'll build
 
 You'll create a "Secure Auth Simulator" that:

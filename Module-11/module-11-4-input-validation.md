@@ -15,6 +15,12 @@ Imagine you have a "Comment Box" on your website. You expect people to write "Gr
 
 **Golden Rule**: Never trust anything a user types.
 
+### ❌ Common Mistakes
+
+- ❌ Displaying raw user input without escaping (XSS risk)
+- ❌ Concatenating user input directly into SQL queries (SQL injection)
+- ❌ Trusting client-side validation only (bypassed easily)
+
 ### What you'll build
 
 You'll create a "Secure Form Handler" that:

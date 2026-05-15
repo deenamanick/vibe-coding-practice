@@ -55,6 +55,109 @@ Before you launch any app, ask yourself these 5 questions:
 
 ---
 
+## 🧪 Challenge: Fix the Vulnerable App
+
+A junior dev built an app with 5 security flaws. Fix them using Modules 11.1–11.4.
+
+### Step 1: Copy this broken code into `vulnerable-app.js`
+
+```js
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+// BUG 1: Hardcoded API Key (Module 11.2)
+const API_KEY = "gsk_live_abc123_secret_key_here";
+
+// BUG 2: Plain text password (Module 11.1)
+const users = [
+    { email: "test@test.com", password: "password123" }
+];
+
+// BUG 3: No input validation (Module 11.4)
+app.post('/api/login', (req, res) => {
+    const { email, password } = req.body;
+
+    const user = users.find(u => u.email === email);
+    if (!user) {
+        // BUG 4: Error message leaks to client
+        return res.status(404).json({ error: `User ${email} not found in database` });
+    }
+
+    if (user.password === password) {
+        res.json({ message: "Login successful", token: API_KEY });
+    } else {
+        res.status(401).json({ error: "Invalid password" });
+    }
+});
+
+// BUG 5: HTTP redirect URL (Module 11.3)
+app.get('/api/redirect', (req, res) => {
+    res.redirect('http://evil.com');
+});
+
+app.listen(3000, () => console.log('Vulnerable app running on http://localhost:3000'));
+```
+
+### Step 2: Fix all 5 bugs (step-by-step)
+
+**FIX 1: Move API key to `.env` (Module 11.2)**
+```js
+// BEFORE (vulnerable)
+const API_KEY = "gsk_live_abc123_secret_key_here";
+
+// AFTER (safe)
+require('dotenv').config();
+const API_KEY = process.env.API_KEY;
+```
+Don't forget to create a `.env` file and add `.env` to `.gitignore`!
+
+**FIX 2: Hash the password (Module 11.1)**
+```js
+// BEFORE (plain text)
+const users = [{ email: "test@test.com", password: "password123" }];
+
+// AFTER (hashed)
+const bcrypt = require('bcryptjs');
+const users = [{ email: "test@test.com", password: await bcrypt.hash("password123", 10) }];
+```
+Use `bcrypt.compare()` when checking login passwords.
+
+**FIX 3: Add input validation (Module 11.4)**
+```js
+// BEFORE - no validation
+app.post('/api/login', (req, res) => {
+
+// AFTER - validated
+const { body, validationResult } = require('express-validator');
+app.post('/api/login', [
+    body('email').isEmail(),
+    body('password').isLength({ min: 6 })
+], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+```
+
+**FIX 4: Return generic errors**
+```js
+// BEFORE (leaks info)
+return res.status(404).json({ error: `User ${email} not found` });
+
+// AFTER (safe)
+return res.status(401).json({ error: "Invalid credentials" });
+```
+
+**FIX 5: Use HTTPS**
+```js
+// BEFORE
+res.redirect('http://evil.com');
+
+// AFTER
+res.redirect('https://trusted-site.com');
+```
+
+---
+
 ### ✅ Success Checklist
 
 - [ ] You can name at least 3 OWASP risks.
@@ -68,6 +171,12 @@ Before you launch any app, ask yourself these 5 questions:
 
 **Problem**: "My app is too small to be hacked"
 - **Fix**: Hackers use "Bots" that scan every website on the internet automatically. They don't care how small you are!
+
+### ❌ Common Mistakes
+
+- ❌ Thinking "security is a final step" instead of building it in from day one
+- ❌ Ignoring CI/CD pipeline security (only focusing on app code)
+- ❌ Showing detailed error messages or stack traces to users
 
 ---
 

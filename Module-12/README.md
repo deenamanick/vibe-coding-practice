@@ -8,6 +8,9 @@ This module teaches you how to ensure your code actually works, how to test AI-g
 - `module-12-2-debugging-ai-code.md` — Debugging AI-generated code (When the AI makes mistakes)
 - `module-12-3-basic-unit-testing.md` — Basic Unit Testing (Jest for beginners)
 - `module-12-4-testing-ai-responses.md` — Testing AI Response Quality (Evaluating LLM output)
+- `module-12-5-api-design-fundamentals.md` — API Design Fundamentals (REST, HTTP methods, status codes)
+- `module-12-6-api-protocols-integration.md` — API Protocols & Integration (Real-world patterns)
+- `module-12-7-design-principles.md` — Design Principles (Consistency, Simplicity, Security, Performance)
 
 ### Recommended order
 
@@ -15,6 +18,9 @@ This module teaches you how to ensure your code actually works, how to test AI-g
 2. Debugging AI-generated Code
 3. Basic Unit Testing
 4. Testing AI Responses
+5. API Design Fundamentals
+6. API Protocols & Integration
+7. Design Principles
 
 ### Prerequisites
 

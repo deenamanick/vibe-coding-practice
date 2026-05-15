@@ -16,6 +16,12 @@ Imagine you have a "Gold Card" that gives you free access to any store. If you l
 - You tell Git to **ignore** this file so it never leaves your computer.
 - Your code "borrows" the keys from this secret file only when it's running.
 
+### ❌ Common Mistakes
+
+- ❌ Hardcoding: `const key = "gsk_123"`
+- ❌ Logging: `console.log(key)`
+- ❌ Committing .env (forget .gitignore)
+
 ### What you'll build
 
 You'll create a "Secret Keeper" setup that:
