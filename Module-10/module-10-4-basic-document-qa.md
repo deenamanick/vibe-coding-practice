@@ -40,7 +40,6 @@ Update `server.js` and paste this complete RAG logic:
 require('dotenv').config();
 const express = require('express');
 const Groq = require('groq-sdk');
-const similarityScore = require('similarity-score');
 
 const app = express();
 app.use(express.json());
@@ -56,18 +55,67 @@ const knowledgeBase = [
   "Health Benefits: Full health insurance is provided after 3 months of employment."
 ];
 
-// 2. Simple Search Function (Our "Retriever")
-function findRelevantKnowledge(query) {
-  const matches = knowledgeBase.map(doc => ({
-    text: doc,
-    score: similarityScore(query, doc)
-  }));
+// 2. Store embeddings for each document
+let documentEmbeddings = [];
+
+// 3. Generate embeddings for all documents at startup
+async function generateEmbeddings() {
+  console.log("🔄 Generating embeddings for knowledge base...");
   
-  // Sort and pick the best match
-  return matches.sort((a, b) => b.score - a.score)[0].text;
+  for (const doc of knowledgeBase) {
+    const response = await groq.embeddings.create({
+      model: "BAAI/bge-large-en-v1.5", // FREE embedding model
+      input: doc
+    });
+    
+    documentEmbeddings.push({
+      text: doc,
+      embedding: response.data[0].embedding // 1024-dimensional vector
+    });
+  }
+  
+  console.log(`✅ Generated ${documentEmbeddings.length} embeddings`);
 }
 
-// 3. Optimization Helpers (from caching-standards.md)
+// 4. Cosine Similarity: Measure how close two vectors are
+function cosineSimilarity(vecA, vecB) {
+  let dotProduct = 0;
+  let normA = 0;
+  let normB = 0;
+  
+  for (let i = 0; i < vecA.length; i++) {
+    dotProduct += vecA[i] * vecB[i];
+    normA += vecA[i] * vecA[i];
+    normB += vecB[i] * vecB[i];
+  }
+  
+  return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+}
+
+// 5. Smart Search Function (Our "Retriever" using REAL embeddings)
+async function findRelevantKnowledge(query) {
+  // Generate embedding for the query
+  const response = await groq.embeddings.create({
+    model: "BAAI/bge-large-en-v1.5",
+    input: query
+  });
+  
+  const queryEmbedding = response.data[0].embedding;
+  
+  // Compare query embedding with all document embeddings
+  const matches = documentEmbeddings.map(doc => ({
+    text: doc.text,
+    score: cosineSimilarity(queryEmbedding, doc.embedding)
+  }));
+  
+  // Sort by similarity score (highest first) and return the best match
+  const sorted = matches.sort((a, b) => b.score - a.score);
+  console.log(`🔍 Query: "${query}" | Best match score: ${sorted[0].score.toFixed(3)}`);
+  
+  return sorted[0];
+}
+
+// 6. Optimization Helpers (from caching-standards.md)
 function pickModel(prompt) {
   // Simple tasks like FAQ retrieval are routed to faster, cheaper models
   return prompt.length < 200 ? 'llama3-8b-8192' : 'llama3-70b-8192';
@@ -78,26 +126,46 @@ function getMaxTokens(taskType) {
   return limits[taskType] || 500;
 }
 
-// 4. The RAG Endpoint
+// 7. Initialize embeddings before starting server
+generateEmbeddings().then(() => {
+  const PORT = 3000;
+  app.listen(PORT, () => console.log(`Smart RAG Bot running on http://localhost:${PORT}`));
+});
+
+// 8. The RAG Endpoint
 app.post('/api/rag/ask', async (req, res) => {
   const { question } = req.body;
 
   if (!question) return res.status(400).json({ error: "Question is required" });
 
   try {
-    // STEP A: RETRIEVE the relevant knowledge
-    const knowledge = findRelevantKnowledge(question);
-    console.log(`Found relevant info: "${knowledge}"`);
+    // STEP A: RETRIEVE the relevant knowledge using REAL embeddings
+    const match = await findRelevantKnowledge(question);
+    const knowledge = match.text;
+    const similarityScore = match.score;
+    
+    console.log(`📄 Found relevant info: "${knowledge}"`);
+    console.log(`📊 Similarity score: ${similarityScore.toFixed(3)}`);
+    
+    // Check if the match is too weak (threshold: 0.5)
+    if (similarityScore < 0.5) {
+      return res.json({
+        question: question,
+        answer: "I don't have enough information to answer that question.",
+        source_used: null,
+        confidence: similarityScore.toFixed(3),
+        model_used: null
+      });
+    }
 
     // STEP B: GENERATE the answer using AI with standard optimizations
     const completion = await groq.chat.completions.create({
       messages: [
         { 
           role: "system", 
-          content: `HR Assistant. Answer based ONLY on context. If unknown, say "I don't know".` // Lean System Prompt
+          content: `You are an HR Assistant. Answer based ONLY on the provided context. If the context doesn't contain the answer, say "I don't have that information." Be concise and helpful.`
         },
-        { role: "system", content: `CONTEXT: ${knowledge}` },
-        { role: "user", content: question }
+        { role: "user", content: `Context: ${knowledge}\n\nQuestion: ${question}` }
       ],
       model: pickModel(question), // Intelligent Routing
       max_tokens: getMaxTokens('chat') // Output Token Capping
@@ -107,6 +175,7 @@ app.post('/api/rag/ask', async (req, res) => {
       question: question,
       answer: completion.choices[0].message.content,
       source_used: knowledge,
+      confidence: similarityScore.toFixed(3),
       model_used: completion.model
     });
   } catch (error) {
@@ -114,9 +183,6 @@ app.post('/api/rag/ask', async (req, res) => {
     res.status(500).json({ error: "Failed to get RAG answer" });
   }
 });
-
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Smart RAG Bot running on http://localhost:${PORT}`));
 ```
 
 ## Step 2: Run the server
@@ -156,27 +222,52 @@ curl -X POST http://localhost:3000/api/rag/ask \
 ```
 
 **What you're learning:**
-- **RETRIEVAL**: Your code found the right policy before the AI even saw the question.
-- **AUGMENTATION**: You added that policy to the AI's prompt.
+- **RETRIEVAL**: Your code converted the question to an embedding and found the most semantically similar policy.
+- **AUGMENTATION**: You added that policy to the AI's prompt with the question.
 - **GENERATION**: The AI wrote a nice answer using *only* that policy.
-- **ACCURACY**: The AI didn't "guess" about the lunch budget; it admitted it didn't know.
+- **ACCURACY**: The AI didn't "guess" about the lunch budget; the low similarity score prevented it from answering.
 
 ---
 
 ### ✅ Success Checklist
 
 - [ ] `POST /api/rag/ask` endpoint added.
-- [ ] AI answers correctly based on the `knowledgeBase`.
-- [ ] AI refuses to answer questions not in the `knowledgeBase`.
-- [ ] You understand: **RAG** = Search (Retreival) + Summarize (Generation).
+- [ ] AI answers correctly based on the `knowledgeBase` using REAL embeddings.
+- [ ] AI refuses to answer questions with low confidence (< 0.5 similarity).
+- [ ] You can see similarity scores in the console output.
+- [ ] You understand: **RAG** = Embed (Retrieval) + Cosine Similarity (Search) + Generate (Answer).
 
 ### 🆘 Common Problems
 
 **Problem**: "AI still guesses the answer"
-- **Fix**: Make your System Prompt stricter: "Use ONLY the information provided. Do NOT use your own knowledge."
+- **Fix**: The similarity threshold (0.5) should catch this. Lower it to 0.4 if needed, or make the System Prompt stricter.
 
 **Problem**: "Wrong policy retrieved"
-- **Fix**: Simple keyword matching can fail. Real RAG uses **Embeddings** (Module 10.2) to find the right meaning.
+- **Fix**: Check the similarity scores in console. If scores are all similar (< 0.2 difference), add more distinctive policies or use a better embedding model like `nomic-embed-text`.
+
+**Problem**: "Rate limit reached" or "Embedding API error"
+- **Fix**: Groq embeddings are FREE but have rate limits. Wait 30 seconds and retry. Check your API key in `.env`.
+
+**Problem**: "Server takes too long to start"
+- **Fix**: Normal! The server generates embeddings for all documents at startup. For 5 policies, it takes ~2-3 seconds. For production, you'd cache these in a database.
+
+### 💡 Understanding Embeddings in Action
+
+When you run the tests, watch the console output:
+```
+🔄 Generating embeddings for knowledge base...
+✅ Generated 5 embeddings
+🔍 Query: "How many vacation days do I get?" | Best match score: 0.847
+📄 Found relevant info: "Vacation Policy: Employees get 20 days..."
+📊 Similarity score: 0.847
+```
+
+**What's happening:**
+- Your question becomes a 1024-number vector: `[0.023, -0.451, 0.892, ...]`
+- Each policy is also a 1024-number vector
+- Cosine similarity measures the "angle" between vectors
+- **0.847** means 84.7% semantically similar (very high!)
+- **< 0.5** means not similar enough (AI won't answer)
 
 ---
 
@@ -190,6 +281,7 @@ Frontend Requirements:
 - When I ask a question, show a "Searching Handbook..." animation.
 - Display the AI response in a "Support Agent" bubble.
 - Under the response, show a "Source" tag: "Answered using: Vacation Policy".
+- Show a "Confidence Score" bar (e.g., "85% confident").
 - A "Handbooks" section showing all the policies the bot "knows".
 - Use a "Professional Office" theme (blues, greys, clean typography).
 - Add a "Feedback" thumb up/down for each answer.
@@ -197,7 +289,7 @@ Frontend Requirements:
 Integration Specs (Mock for Lovable):
 - Expecting a POST /api/rag/ask endpoint.
 - Request body: { "question": "..." }
-- Response structure: { "answer": "...", "source_used": "..." }
+- Response structure: { "answer": "...", "source_used": "...", "confidence": "0.85" }
 
 (Note: You are building the FRONTEND only. The actual LLM logic and Groq integration will be handled via Windsurf in the next step.)
 ```
@@ -229,7 +321,8 @@ const handleSendMessage = async (userQuestion) => {
   setMessages([...messages, { 
     text: data.answer, 
     sender: 'bot', 
-    source: data.source_used 
+    source: data.source_used,
+    confidence: data.confidence
   }]);
 };
 ```
@@ -238,4 +331,4 @@ const handleSendMessage = async (userQuestion) => {
 - Start your **Backend**: `node server.js` (Port 3000)
 - Start your **Frontend**: `npm run dev` (Port 5173)
 
-Now, your professional UI is officially powered by your custom RAG logic!
+Now, your professional UI is officially powered by your custom RAG logic with REAL embeddings!

@@ -56,8 +56,24 @@ To ensure cost-efficiency and performance, all AI-related modules must follow th
 
 ## 9. Semantic Caching (Local Optimization)
 - **Principle**: Use local vector similarity (e.g., `similarity-score` or `MiniVectorDB`) to detect semantically identical questions.
-- **Mechanism**: 
+- **Mechanism**:
   - Store previous user prompts and their LLM responses in a local array or SQLite database.
   - Before calling the LLM, compare the current prompt to the stored history using `similarityScore`.
   - If a match exists with a score > 0.90, return the cached result.
 - **Cost Impact**: Saves 10-30% by catching variations (e.g., "Summarize this" vs "Give me a summary") without needing external services like Pinecone.
+
+## 10. Structural Knowledge Graphs (Graphify)
+- **Principle**: Use knowledge graphs instead of raw file retrieval for codebase understanding. Traditional RAG loses structural information (who calls whom, dependencies, rationale).
+- **Mechanism**:
+  - Run Graphify on the codebase: `/graphify .` or `$graphify .` to generate `graphify-out/` with `graph.json`, `graph.html`, and `GRAPH_REPORT.md`.
+  - The graph preserves nodes (classes, functions, design decisions, paper sections, diagrams) and edges (calls, imports, rationale_for, semantically_similar_to).
+  - For code-related queries, traverse the graph instead of reading raw files.
+  - Use the generated `GRAPH_REPORT.md` as a pre-read context before Glob/Grep operations.
+- **Cost Impact**: On a 52-file mixed corpus (code + papers + images), average query costs ~1.7k tokens against the graph vs ~123k reading raw files — a **71.5× reduction**.
+- **Multi-Modal Benefit**: Diagrams can connect to code nodes and paper sections on the same graph — impossible with flat vector stores.
+- **Implementation**:
+  - Install Graphify: `pipx install graphifyy` (note: package name is graphifyy with double-y)
+  - Run on project root: `graphify extract .` (requires LLM API key: GEMINI_API_KEY, ANTHROPIC_API_KEY, or OPENAI_API_KEY)
+  - Locate `graphify-out/` with `graph.json`, `graph.html`, and `GRAPH_REPORT.md`.
+  - Integrate with Claude Code using PreToolUse hook to consult `GRAPH_REPORT.md` before file operations.
+  - For custom assistants, query `graph.json` to find relevant nodes and edges before calling the LLM.
