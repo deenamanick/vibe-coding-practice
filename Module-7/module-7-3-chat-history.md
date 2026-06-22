@@ -13,6 +13,9 @@ Basic chat history is good, but real chat apps need more:
 
 Think of it like organizing your text messages - you want to find old conversations easily!
 
+> [!NOTE]
+> If you are looking for the step-by-step implementation guide for chat history using MongoDB/Mongoose, refer to this module's exercises. We have consolidated the implementation steps into this single practical.
+
 ### What you'll build
 
 You'll add advanced chat history features:

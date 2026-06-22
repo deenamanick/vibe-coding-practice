@@ -7,9 +7,9 @@ To ensure cost-efficiency and performance, all AI-related modules must follow th
 - **Key Format**: `chat:{hash(prompt)}`
 - **TTL**: Default to 1 hour (3600 seconds) unless the content is highly dynamic.
 
-## 2. Token Saving in Windsurf
+## 2. Token Saving in Visual Studio Code
 - **Memory Usage**: Use `create_memory` to store core architectural decisions.
-- **Workflow Automation**: Define repetitive tasks in `.windsurf/workflows/` to avoid redundant prompt engineering.
+- **Workflow Automation**: Define repetitive tasks in `.Visual Studio Code/workflows/` to avoid redundant prompt engineering.
 - **Rule Enforcement**: Always refer to this rules file when implementing new LLM features.
 
 ## 3. Context Window Optimization (History Trimming)

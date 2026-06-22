@@ -1,4 +1,4 @@
-## Practical 5: Basic OWASP Awareness (Web & CI/CD Security)
+## Practical 5: Basic OWASP Awareness (Web & CI/CD Security) (Optional)
 
 ### Why (in simple terms)
 
@@ -203,17 +203,17 @@ Integration Specs (Mock for Lovable):
 - Request body: { "webResolved": [1, 2], "cicdResolved": [1, 4, 6] }
 - Response structure: { "report": "...", "score": 85, "grade": "Secure" }
 
-(Note: You are building the FRONTEND only. The actual scoring logic and report generation will be handled via Windsurf.)
+(Note: You are building the FRONTEND only. The actual scoring logic and report generation will be handled via Visual Studio Code.)
 ```
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to Security Auditing
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to Security Auditing
 
-Once your "Security Dashboard" UI is ready, use **Windsurf** to make it functional.
+Once your "Security Dashboard" UI is ready, use **Visual Studio Code** to make it functional.
 
 ### 1. Export from Lovable
-Open your downloaded Lovable project in **Windsurf**.
+Open your downloaded Lovable project in **Visual Studio Code**.
 
 ### 2. Connect the Auditing Engine
 Update your frontend to talk to your local backend which handles security calculations:

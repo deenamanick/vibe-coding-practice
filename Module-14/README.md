@@ -1,4 +1,4 @@
-# Module 14: CI/CD Pipeline
+# Module 14: CI/CD Pipeline (Optional)
 
 This module teaches you how to automate the "boring stuff" - testing and deploying your code every time you save it.
 

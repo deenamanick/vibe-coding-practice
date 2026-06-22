@@ -41,13 +41,13 @@ async function getChatResponse(prompt) {
 }
 ```
 
-## 🧠 Saving Tokens in Windsurf (Cascade)
+## 🧠 Saving Tokens in Visual Studio Code (Cascade)
 
-While the above logic is for your **end-users**, you can also save tokens while **developing** in Windsurf by using the "Knowledge Base" strategy.
+While the above logic is for your **end-users**, you can also save tokens while **developing** in Visual Studio Code by using the "Knowledge Base" strategy.
 
-### 1. `.windsurf/rules/`
-You can create a `.md` file in `.windsurf/rules/` to define your project's architecture once. 
-- **Standard**: Refer to `@/home/deena/Pictures/whizlabs/vibe-coding-practice/.windsurf/rules/caching-standards.md` for the full optimization framework.
+### 1. `.Visual Studio Code/rules/`
+You can create a `.md` file in `.Visual Studio Code/rules/` to define your project's architecture once. 
+- **Standard**: Refer to `@/home/deena/Pictures/whizlabs/vibe-coding-practice/.Visual Studio Code/rules/caching-standards.md` for the full optimization framework.
 - **Benefit**: Cascade will always "remember" these rules (Caching, Tiering, Trimming, etc.) without you having to re-explain them, saving significant input tokens during development.
 
 ### 2. `create_memory`

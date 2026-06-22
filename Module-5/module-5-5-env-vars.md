@@ -44,10 +44,10 @@ Make it feel like a professional infrastructure monitoring tool!
 
 ---
 
-## 🌊 Windsurf Practice: Setting up the Remote
+## 🌊 Visual Studio Code Practice: Setting up the Remote
 
 ### Step 1: Initialize the Project
-1. Open **Windsurf** terminal and run:
+1. Open **Visual Studio Code** terminal and run:
    ```bash
    mkdir env-lab
    cd env-lab
@@ -56,10 +56,10 @@ Make it feel like a professional infrastructure monitoring tool!
    ```
 
 ### Step 2: Create the `.env` Secret File
-Ask Windsurf: `"Create a .env file with PORT=3000 and NODE_ENV=development. Also create a .gitignore file that excludes the .env file."`
+Ask Visual Studio Code: `"Create a .env file with PORT=3000 and NODE_ENV=development. Also create a .gitignore file that excludes the .env file."`
 
 ### Step 3: Connect the Code
-Ask Windsurf: `"Create a server.js that uses the 'dotenv' library to read the PORT from the .env file. Add a route /status that returns the current environment and port."`
+Ask Visual Studio Code: `"Create a server.js that uses the 'dotenv' library to read the PORT from the .env file. Add a route /status that returns the current environment and port."`
 
 #### 💡 Code Breakdown (The Secret Sauce):
 - **`require("dotenv").config()`**: This is the "Plug-in". It reads the `.env` file and puts everything into `process.env`.

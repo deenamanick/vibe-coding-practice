@@ -203,12 +203,12 @@ Make it look like a high-end testing tool for developers!
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to Test Runner
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to Test Runner
 
-Once your "API Testing Dashboard" UI is ready, use **Windsurf** to power it with the `test-api.js` logic.
+Once your "API Testing Dashboard" UI is ready, use **Visual Studio Code** to power it with the `test-api.js` logic.
 
 ### 1. Export from Lovable
-Open your downloaded Lovable project in **Windsurf**.
+Open your downloaded Lovable project in **Visual Studio Code**.
 
 ### 2. Connect the Test Engine
 

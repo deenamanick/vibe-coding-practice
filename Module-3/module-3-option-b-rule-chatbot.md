@@ -42,10 +42,10 @@ Make it look like a friendly customer support chat widget!
 
 ---
 
-## 🌊 Windsurf + Vite Setup (Pro Development)
+## 🌊 Visual Studio Code + Vite Setup (Pro Development)
 
 ### Step 1: Initialize with Vite
-1. Open **Windsurf** terminal and run:
+1. Open **Visual Studio Code** terminal and run:
    ```bash
    npm create vite@latest rule-chatbot -- --template react
    cd rule-chatbot
@@ -55,7 +55,7 @@ Make it look like a friendly customer support chat widget!
    ```
 
 ### Step 2: Configure Tailwind
-Ask Windsurf: `"Set up Tailwind CSS for this React project and configure the content paths."`
+Ask Visual Studio Code: `"Set up Tailwind CSS for this React project and configure the content paths."`
 
 ### Step 3: Create the Chatbot Component (`src/ChatBot.jsx`)
 Replace the contents of `App.jsx` with this professional rule-based chatbot.

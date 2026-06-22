@@ -1,4 +1,4 @@
-## Practical 6: API Protocols & Integration (Real-World API Patterns)
+## Practical 6: API Protocols & Integration (Real-World API Patterns) (Optional)
 
 ### Why (in simple terms)
 
@@ -236,17 +236,17 @@ Integration Specs (Mock for Lovable):
 - Response success: { "location": "...", "current": { "temperature": 15, ... } }
 - Response error: { "error": true, "message": "...", "suggestion": "..." }
 
-(Note: You are building the FRONTEND only. The API client logic, caching, retries, and validation will be handled via Windsurf.)
+(Note: You are building the FRONTEND only. The API client logic, caching, retries, and validation will be handled via Visual Studio Code.)
 ```
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to API Client
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to API Client
 
-Once your "API Integration Dashboard" is ready, use **Windsurf** to power it with the `api-client.js` logic.
+Once your "API Integration Dashboard" is ready, use **Visual Studio Code** to power it with the `api-client.js` logic.
 
 ### 1. Export from Lovable
-Open your downloaded Lovable project in **Windsurf**.
+Open your downloaded Lovable project in **Visual Studio Code**.
 
 ### 2. Connect the API Engine
 

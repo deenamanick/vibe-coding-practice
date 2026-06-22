@@ -47,10 +47,10 @@ Make it look like a professional SaaS productivity tool!
 
 ---
 
-## 🌊 Windsurf + Node Setup (Pro Development)
+## 🌊 Visual Studio Code + Node Setup (Pro Development)
 
 ### Step 1: Initialize the Project
-1. Open **Windsurf** terminal and run:
+1. Open **Visual Studio Code** terminal and run:
    ```bash
    mkdir notes-api
    cd notes-api
@@ -59,7 +59,7 @@ Make it look like a professional SaaS productivity tool!
    ```
 
 ### Step 2: Create the Server (`index.js`)
-Ask Windsurf: `"Create a professional Express server in index.js with CRUD routes for a 'notes' resource using an in-memory array."`
+Ask Visual Studio Code: `"Create a professional Express server in index.js with CRUD routes for a 'notes' resource using an in-memory array."`
 
 #### 💡 Code Breakdown (What to look for):
 - **`app.use(express.json())`**: This is the "Parser". It allows Express to read JSON data sent in a POST request.

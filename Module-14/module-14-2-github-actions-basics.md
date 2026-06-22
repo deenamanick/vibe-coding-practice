@@ -1,4 +1,4 @@
-## Practical 2: GitHub Actions Basics (YAML & Workflows)
+## Practical 2: GitHub Actions Basics (YAML & Workflows) (Optional)
 
 ### Why (in simple terms)
 

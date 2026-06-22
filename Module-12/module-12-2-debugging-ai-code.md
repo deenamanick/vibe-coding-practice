@@ -167,12 +167,12 @@ Make it look like a high-tech tool for verifying AI-generated code!
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to Debug Simulator
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to Debug Simulator
 
-Once your "Code Debugger Simulator" UI is ready, use **Windsurf** to power it.
+Once your "Code Debugger Simulator" UI is ready, use **Visual Studio Code** to power it.
 
 ### 1. Export from Lovable
-Open your downloaded Lovable project in **Windsurf**.
+Open your downloaded Lovable project in **Visual Studio Code**.
 
 ### 2. Connect the Debug Engine
 

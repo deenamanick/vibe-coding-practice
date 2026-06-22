@@ -146,12 +146,12 @@ While Cloudinary is great for images/videos, **AWS S3 (Simple Storage Service)**
 
 ---
 
-## 🌊 Windsurf Practice: Integrating AWS S3
+## 🌊 Visual Studio Code Practice: Integrating AWS S3
 
 If you want to move beyond Cloudinary and use S3, follow this flow:
 
 ### 1️⃣ Set up the AWS "Pantry" (Bucket)
-Ask Windsurf: `"How do I create an S3 bucket and get my IAM credentials (Access Key and Secret Key)?"`
+Ask Visual Studio Code: `"How do I create an S3 bucket and get my IAM credentials (Access Key and Secret Key)?"`
 
 ### 2️⃣ Connect your Node.js "Waiter"
 Install the official AWS SDK:
@@ -160,10 +160,10 @@ npm install @aws-sdk/client-s3
 ```
 
 ### 3️⃣ Upload a file step-by-step
-Ask Windsurf: `"Create a script to upload a file to AWS S3 using @aws-sdk/client-s3. I have my ACCESS_KEY and SECRET_KEY in my .env file."`
+Ask Visual Studio Code: `"Create a script to upload a file to AWS S3 using @aws-sdk/client-s3. I have my ACCESS_KEY and SECRET_KEY in my .env file."`
 
 ```javascript
-// Example: Windsurf will generate code using S3Client and PutObjectCommand
+// Example: Visual Studio Code will generate code using S3Client and PutObjectCommand
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 ```
 

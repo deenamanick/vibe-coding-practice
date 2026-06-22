@@ -156,17 +156,17 @@ Integration Specs (Mock for Lovable):
 - Request body: { "email": "...", "comment": "..." }
 - Response structure: { "message": "...", "comment": "...", "isSafe": true }
 
-(Note: You are building the FRONTEND only. The actual validation, sanitization, and regex logic will be handled via Windsurf.)
+(Note: You are building the FRONTEND only. The actual validation, sanitization, and regex logic will be handled via Visual Studio Code.)
 ```
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to Input Validation
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to Input Validation
 
-Once your "Input Security Dashboard" UI is ready, use **Windsurf** to power it with the `secure-form.js` logic.
+Once your "Input Security Dashboard" UI is ready, use **Visual Studio Code** to power it with the `secure-form.js` logic.
 
 ### 1. Export from Lovable
-Open your downloaded Lovable project in **Windsurf**.
+Open your downloaded Lovable project in **Visual Studio Code**.
 
 ### 2. Connect the Validation Engine
 Update your frontend to talk to your local secure server:

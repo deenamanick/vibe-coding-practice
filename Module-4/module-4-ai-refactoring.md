@@ -43,10 +43,10 @@ When you have working code that looks "messy," use these:
 
 ---
 
-## 🌊 Windsurf Practice: The Messy-to-Masterpiece
+## 🌊 Visual Studio Code Practice: The Messy-to-Masterpiece
 
 ### Step 1: Create a Messy Component
-Ask Windsurf: 
+Ask Visual Studio Code: 
 ```text
 Create a 'Dashboard.jsx' that does EVERYTHING in one file:
 - User profile display
@@ -57,7 +57,7 @@ Create a 'Dashboard.jsx' that does EVERYTHING in one file:
 ```
 
 ### Step 2: Ask the AI to Refactor
-Ask Windsurf: 
+Ask Visual Studio Code: 
 ```text
 ROLE: Senior Architect.
 TASK: Refactor this Dashboard into small, modular components.

@@ -37,7 +37,7 @@ Make it look like a high-end tool for prompt engineers!
 
 ## 🏗️ The 5-Part Prompt Template
 
-Use this structure in **Windsurf** or **Lovable** for perfect results every time:
+Use this structure in **Visual Studio Code** or **Lovable** for perfect results every time:
 
 ```text
 1. ROLE: You are a [Senior Developer/Teacher/Designer].
@@ -49,10 +49,10 @@ Use this structure in **Windsurf** or **Lovable** for perfect results every time
 
 ---
 
-## 🌊 Windsurf Practice: Converting "Vague" to "Structured"
+## 🌊 Visual Studio Code Practice: Converting "Vague" to "Structured"
 
 ### Step 1: The Vague Prompt
-Try asking Windsurf: `"Make a nice contact form."`
+Try asking Visual Studio Code: `"Make a nice contact form."`
 *(Notice how it guesses the colors, fields, and styling.)*
 
 ### Step 2: The Structured Prompt

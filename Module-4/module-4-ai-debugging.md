@@ -6,7 +6,7 @@ Even the best AI makes mistakes. **AI Debugging** is how you "find the fly in th
 ### What you'll learn
 1.  **Error Log Analysis**: How to feed "scary red text" into AI for instant fixes.
 2.  **The "Rubber Duck" Method**: Explaining your code to AI to find logic flaws.
-3.  **Windsurf Context**: Using `@file` and `@folder` to give the AI the full picture.
+3.  **Visual Studio Code Context**: Using `@file` and `@folder` to give the AI the full picture.
 4.  **Step-by-Step Tracing**: Asking the AI to "think out loud" before changing code.
 
 ---
@@ -43,17 +43,17 @@ When your code breaks, don't just say "it's broken." Use this:
 
 ---
 
-## 🌊 Windsurf Practice: The "Silent Bug" Hunt
+## 🌊 Visual Studio Code Practice: The "Silent Bug" Hunt
 
 ### Step 1: Create a Broken Component
-Ask Windsurf: 
+Ask Visual Studio Code: 
 ```text
 Create a 'Counter' component with an 'Increment' button.
 But intentionally break the state so it doesn't update (e.g., use a regular variable instead of useState).
 ```
 
 ### Step 2: Ask the AI to Investigate
-Ask Windsurf: 
+Ask Visual Studio Code: 
 ```text
 ROLE: Senior Debugger.
 TASK: My counter isn't updating when I click the button. 

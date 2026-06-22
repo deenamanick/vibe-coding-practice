@@ -33,10 +33,10 @@ Make it look like a premium AI assistant interface!
 
 ---
 
-## 🌊 Windsurf + Vite Setup (Pro Development)
+## 🌊 Visual Studio Code + Vite Setup (Pro Development)
 
 ### Step 1: Initialize with Vite
-1. Open **Windsurf** terminal and run:
+1. Open **Visual Studio Code** terminal and run:
    ```bash
    npm create vite@latest ai-prompt-app -- --template react
    cd ai-prompt-app
@@ -46,7 +46,7 @@ Make it look like a premium AI assistant interface!
    ```
 
 ### Step 2: Configure Tailwind
-Ask Windsurf: `"Set up Tailwind CSS for this React project and configure the content paths."`
+Ask Visual Studio Code: `"Set up Tailwind CSS for this React project and configure the content paths."`
 
 ### Step 3: Create the AI Component (`src/AskAI.jsx`)
 Replace the contents of `App.jsx` with this professional AI chat component.

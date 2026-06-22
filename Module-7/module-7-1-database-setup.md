@@ -11,6 +11,9 @@ So far, we've stored everything in memory (arrays). When the server restarts, al
 
 Think of it like saving a document vs just writing on a whiteboard.
 
+> [!NOTE]
+> For advanced production database essentials (like Backups, Migrations, and Transactions), please refer to the advanced modules later in the curriculum. For now, we will focus on the basics!
+
 ### What you'll build
 
 You'll connect your Express API to a **SQLite database** (simple file-based database):
@@ -493,8 +496,8 @@ Focus on quick CRUD screens (create/list/edit/delete) and a simple DB status pan
 Keep the UI minimal and beginner-friendly.
 ```
 
-### After the UI: Windsurf Backend (recommended)
-Ask Windsurf: "Create an Express backend that matches the endpoints used by my UI and connects to my chosen database (PostgreSQL/MySQL/MongoDB/Firebase/SQLite)."
+### After the UI: Visual Studio Code Backend (recommended)
+Ask Visual Studio Code: "Create an Express backend that matches the endpoints used by my UI and connects to my chosen database (PostgreSQL/MySQL/MongoDB/Firebase/SQLite)."
 
 ---
 

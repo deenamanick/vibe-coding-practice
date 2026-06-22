@@ -181,17 +181,17 @@ Integration Specs (Mock for Lovable):
 - Expecting a POST /api/embeddings/compare endpoint.
 - Response structure: { "similarity": 0.95, "coordinates": [x, y] }
 
-(Note: You are building the FRONTEND only. The actual similarity logic and vector calculations will be handled via Windsurf.)
+(Note: You are building the FRONTEND only. The actual similarity logic and vector calculations will be handled via Visual Studio Code.)
 ```
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to Meaning
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to Meaning
 
-Once your "Meaning Map" UI is ready, use **Windsurf** to power it with the `embedding-test.js` logic.
+Once your "Meaning Map" UI is ready, use **Visual Studio Code** to power it with the `embedding-test.js` logic.
 
 ### 1. Export from Lovable
-Open your downloaded Lovable project in **Windsurf**.
+Open your downloaded Lovable project in **Visual Studio Code**.
 
 ### 2. Connect the "Meaning" Engine
 Update your frontend to talk to your local embedding server:

@@ -145,17 +145,17 @@ Integration Specs (Mock for Lovable):
 - Request body: { "key": "...", "value": "..." }
 - Response structure: { "status": "secured", "path": ".env", "auditScore": 100 }
 
-(Note: You are building the FRONTEND only. The actual file writing, environment variable management, and local security logic will be handled via Windsurf.)
+(Note: You are building the FRONTEND only. The actual file writing, environment variable management, and local security logic will be handled via Visual Studio Code.)
 ```
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to Secret Storage
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to Secret Storage
 
-Once your "Secret Vault" UI is ready, use **Windsurf** to power it with the `secret-keeper.js` logic.
+Once your "Secret Vault" UI is ready, use **Visual Studio Code** to power it with the `secret-keeper.js` logic.
 
 ### 1. Export from Lovable
-Open your downloaded Lovable project in **Windsurf**.
+Open your downloaded Lovable project in **Visual Studio Code**.
 
 ### 2. Connect the Secret Engine
 Update your frontend to talk to your local backend which handles `.env` files:

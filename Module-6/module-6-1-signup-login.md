@@ -2,8 +2,8 @@
 
 > **👨‍🎓 Student Guide: How to follow this Lab**
 > 1. **Phase 1: The UI (Lovable AI)** - Copy the prompt below and use it in [Lovable.ai] to generate your frontend. This is your "Front Door".
-> 2. **Phase 2: The Setup (Windsurf)** - Follow **Step 1** to create your backend folder and install the security tools.
-> 3. **Phase 3: The Brain (Windsurf)** - Follow **Step 2 and 3** to build the server logic. Use the provided "Integrated Lab" code as your reference to ensure your backend speaks the same language as your Lovable UI.
+> 2. **Phase 2: The Setup (Visual Studio Code)** - Follow **Step 1** to create your backend folder and install the security tools.
+> 3. **Phase 3: The Brain (Visual Studio Code)** - Follow **Step 2 and 3** to build the server logic. Use the provided "Integrated Lab" code as your reference to ensure your backend speaks the same language as your Lovable UI.
 
 ### Why (in simple terms)
 Imagine a building with a **front door**. 
@@ -52,10 +52,10 @@ Make it look like a premium SaaS login page!
 
 ---
 
-## 🌊 Windsurf Practice: Building the Front Door
+## 🌊 Visual Studio Code Practice: Building the Front Door
 
 ### Step 1: Initialize the Project
-1. Open **Windsurf** terminal and run:
+1. Open **Visual Studio Code** terminal and run:
    ```bash
    mkdir auth-mastery
    cd auth-mastery
@@ -88,7 +88,7 @@ passport.use(new GitHubStrategy({
 ```
 
 ### Step 3: Create the Secure API (Integrated with Lovable AI)
-Ask Windsurf: `"Create a server.js with /api/auth/signup and /api/auth/login routes. Use 'bcryptjs' to hash passwords. Return a JWT token on successful login. Ensure the routes match the mock calls from my Lovable AI UI."`
+Ask Visual Studio Code: `"Create a server.js with /api/auth/signup and /api/auth/login routes. Use 'bcryptjs' to hash passwords. Return a JWT token on successful login. Ensure the routes match the mock calls from my Lovable AI UI."`
 
 #### 💡 Code Breakdown (The Security Secrets):
 - **`bcrypt.hash()`**: This turns a password like "secret123" into a long string of random characters. Even if a hacker steals the database, they can't read the passwords!
@@ -162,7 +162,7 @@ app.listen(3000, () => console.log("Auth API running on http://localhost:3000"))
 ---
 
 ## Quick practice tasks
-- **GitHub Integration**: Follow the Windsurf instructions to add a `/auth/github` route.
+- **GitHub Integration**: Follow the Visual Studio Code instructions to add a `/auth/github` route.
 - **Password Strength**: Add a middleware that rejects passwords shorter than 8 characters.
 - **Token Verification**: Create a `/profile` route that only works if you provide a valid JWT in the headers.
 

@@ -49,10 +49,10 @@ In code, this looks like:
 
 ---
 
-## 🌊 Windsurf Practice: Adding the "Guard"
+## 🌊 Visual Studio Code Practice: Adding the "Guard"
 
 ### Step 1: Create the Project
-1. Open **Windsurf** terminal and run:
+1. Open **Visual Studio Code** terminal and run:
    ```bash
    mkdir middleware-lab
    cd middleware-lab
@@ -61,7 +61,7 @@ In code, this looks like:
    ```
 
 ### Step 2: Create `server.js`
-Ask Windsurf: `"Create a professional Express server with a custom 'Logger' middleware and an 'Auth' middleware that checks for an 'x-api-key' header."`
+Ask Visual Studio Code: `"Create a professional Express server with a custom 'Logger' middleware and an 'Auth' middleware that checks for an 'x-api-key' header."`
 
 #### �� Code Breakdown (The Middleware Secrets):
 - **`app.use(logger)`**: This makes the guard stand at the **main entrance**. Every single request must pass through it.

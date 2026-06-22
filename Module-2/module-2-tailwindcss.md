@@ -39,14 +39,14 @@ Make it feel like a hands-on building game for learning Tailwind!
 ## Run a small demo (Professional Vite + React Setup)
 
 ### Step 1: Initialize Tailwind in Vite
-1. In your **Windsurf** terminal, inside your React project:
+1. In your **Visual Studio Code** terminal, inside your React project:
    ```bash
    npm install -D tailwindcss postcss autoprefixer
    npx tailwindcss init -p
    ```
 
 ### Step 2: Configure Tailwind (`tailwind.config.js`)
-Ask Windsurf: `"Update my tailwind.config.js to include all my React files."` (Or paste this):
+Ask Visual Studio Code: `"Update my tailwind.config.js to include all my React files."` (Or paste this):
 ```js
 /** @type {import('tailwindcss').Config} */
 export default {

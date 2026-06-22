@@ -6,7 +6,7 @@ If you ask the AI to "build a whole Amazon clone" in one go, it will get confuse
 ### What you'll learn
 1.  **Vertical Slicing**: Building one feature from front-to-back before moving to the next.
 2.  **Modular Thinking**: Creating components as independent "LEGO bricks."
-3.  **Windsurf Context**: How to guide Windsurf to finish one file before starting the next.
+3.  **Visual Studio Code Context**: How to guide Visual Studio Code to finish one file before starting the next.
 4.  **Incremental Testing**: Running your app after every small change.
 
 ---
@@ -43,18 +43,18 @@ Instead of: "Build a Login System with Database and Email Alerts."
 
 ---
 
-## 🌊 Windsurf Practice: The Incremental Build
+## 🌊 Visual Studio Code Practice: The Incremental Build
 
 ### Step 1: The First Bite
-Ask Windsurf: `"Create a simple 'Task Tracker' UI with just an input and a list."`
+Ask Visual Studio Code: `"Create a simple 'Task Tracker' UI with just an input and a list."`
 *(Wait for it to finish and run the app.)*
 
 ### Step 2: The Second Bite
-Ask Windsurf: `"Now add a 'Delete' button to each task and make it work."`
+Ask Visual Studio Code: `"Now add a 'Delete' button to each task and make it work."`
 *(Wait, run, and verify.)*
 
 ### Step 3: The Final Bite
-Ask Windsurf: `"Now add a 'Dark Mode' toggle that saves my preference using LocalStorage."`
+Ask Visual Studio Code: `"Now add a 'Dark Mode' toggle that saves my preference using LocalStorage."`
 
 #### 💡 Code Breakdown (Why this works):
 - **Incremental Steps**: By waiting for each step, you prevent "Code Rot" (where the AI deletes old code while adding new code).
@@ -65,12 +65,12 @@ Ask Windsurf: `"Now add a 'Dark Mode' toggle that saves my preference using Loca
 ## Quick practice tasks
 - **Add a "Bite"**: Take a feature you want (like a Search Bar) and break it into 3 smaller tasks.
 - **Refactor Chunk**: Ask the AI to move a piece of code into its own separate file (Bite-sized components).
-- **The "Context" Bite**: Ask Windsurf to "Explain the code you just wrote before we add the next feature."
+- **The "Context" Bite**: Ask Visual Studio Code to "Explain the code you just wrote before we add the next feature."
 
 ---
 
 ## Checklist
 - [ ] You understand why large prompts lead to "lazy AI" mistakes.
 - [ ] You can break a complex feature into at least 3 smaller chunks.
-- [ ] You have successfully used Windsurf to build an app incrementally.
+- [ ] You have successfully used Visual Studio Code to build an app incrementally.
 - [ ] You know how to verify each "Bite" before moving to the next.

@@ -291,17 +291,17 @@ Integration Specs (Mock for Lovable):
 - Request body: { "question": "..." }
 - Response structure: { "answer": "...", "source_used": "...", "confidence": "0.85" }
 
-(Note: You are building the FRONTEND only. The actual LLM logic and Groq integration will be handled via Windsurf in the next step.)
+(Note: You are building the FRONTEND only. The actual LLM logic and Groq integration will be handled via Visual Studio Code in the next step.)
 ```
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to Backend
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to Backend
 
 Once you have your beautiful UI from Lovable, it's time to make it "smart" using the Node.js backend you built in Step 1.
 
 ### 1. Export from Lovable
-Download your Lovable project and open it in **Windsurf**.
+Download your Lovable project and open it in **Visual Studio Code**.
 
 ### 2. Connect the API
 In your React/Frontend code (usually in a `Chat` or `App` component), find the function that handles sending messages. Update the `fetch` call to point to your local server:

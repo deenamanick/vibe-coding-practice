@@ -1,4 +1,4 @@
-## Practical 4: Automatic Deployment (The CD part)
+## Practical 4: Automatic Deployment (The CD part) (Optional)
 
 ### Why (in simple terms)
 

@@ -1,7 +1,7 @@
 # Hands-on 8.3: Storing User Avatars with AWS S3
 
 ## Goal
-Implement a robust image storage system using **Amazon S3**. You will move from storing simple URL strings to handling actual file uploads, storing them in the cloud, and saving the persistent link in your database.
+Implement a robust image storage system using **Amazon S3**. You will move from storing simple URL strings to handling actual file uploads, storing them in the cloud, and saving the persistent link in your database. (Note: We have deprecated the local Multer storage module as S3 is the modern standard).
 
 ## Architecture Flow
 1. **Frontend:** User selects a local image file and clicks "Upload".

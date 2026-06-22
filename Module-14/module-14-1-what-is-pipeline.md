@@ -1,4 +1,4 @@
-## Practical 1: What is a Pipeline? (CI vs CD concepts)
+## Practical 1: What is a Pipeline? (CI vs CD concepts) (Optional)
 
 ### Why (in simple terms)
 

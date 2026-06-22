@@ -1,4 +1,4 @@
-## Practical 3: Automated Testing (The CI part)
+## Practical 3: Automated Testing (The CI part) (Optional)
 
 ### Why (in simple terms)
 

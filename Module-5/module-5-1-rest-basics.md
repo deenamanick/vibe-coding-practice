@@ -80,10 +80,10 @@ While REST is the most common, you will hear about these in advanced projects:
 
 ---
 
-## 🌊 Windsurf Practice: Designing the "Notes" API
+## 🌊 Visual Studio Code Practice: Designing the "Notes" API
 
 ### Step 1: The Design Prompt
-Ask Windsurf: 
+Ask Visual Studio Code: 
 ```text
 ROLE: Backend Architect.
 TASK: Propose a RESTful URL structure for a "Notes" application.

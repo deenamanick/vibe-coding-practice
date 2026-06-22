@@ -6,7 +6,7 @@ Your first prompt is rarely perfect. **Prompt Refinement** is like **sculpting w
 ### What you'll learn
 1.  **Feedback Loops**: How to tell the AI "almost, but fix X and Y."
 2.  **Specific Critiques**: Giving the AI high-quality feedback to get high-quality code.
-3.  **Windsurf History**: Using the previous chat context to "steer" the project.
+3.  **Visual Studio Code History**: Using the previous chat context to "steer" the project.
 4.  **The "Correction" Prompt**: How to fix an AI mistake without restarting.
 
 ---
@@ -42,21 +42,21 @@ When the AI gives you code that's "not quite right," don't start over. Follow th
 
 ---
 
-## 🌊 Windsurf Practice: Steering the Sculpture
+## 🌊 Visual Studio Code Practice: Steering the Sculpture
 
 ### Step 1: The Rough Block
-Ask Windsurf: `"Build a simple profile card for a developer."`
+Ask Visual Studio Code: `"Build a simple profile card for a developer."`
 *(Wait for the result. It might be too simple or have the wrong colors.)*
 
 ### Step 2: The First Refinement
-Ask Windsurf: 
+Ask Visual Studio Code: 
 ```text
 "Great start. Now, add a 'Skills' section with 5 tags (React, Tailwind, etc.) 
 and make the profile picture circular with a blue border."
 ```
 
 ### Step 3: The Final Polish
-Ask Windsurf: 
+Ask Visual Studio Code: 
 ```text
 "One last thing: make the whole card responsive so it looks good on mobile, 
 and add a subtle hover effect that scales the card slightly."
@@ -64,7 +64,7 @@ and add a subtle hover effect that scales the card slightly."
 
 #### 💡 Code Breakdown (Why this works):
 - **Iterative Steering**: By adding features one-by-one, you don't overwhelm the AI.
-- **Context Awareness**: Notice how Windsurf *remembers* Step 1 while doing Step 2. You don't have to re-explain the whole card!
+- **Context Awareness**: Notice how Visual Studio Code *remembers* Step 1 while doing Step 2. You don't have to re-explain the whole card!
 
 ---
 

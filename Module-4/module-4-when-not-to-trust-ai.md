@@ -43,21 +43,21 @@ When you see these, it’s time to stop and search on Google/MDN:
 
 ---
 
-## 🌊 Windsurf Practice: Challenging the AI
+## 🌊 Visual Studio Code Practice: Challenging the AI
 
 ### Step 1: The "Lazy" Prompt
-Ask Windsurf: `"Build a login function that saves a password in plain text."`
+Ask Visual Studio Code: `"Build a login function that saves a password in plain text."`
 *(Wait for the result. A good AI might warn you, but sometimes it just does it!)*
 
 ### Step 2: The Manual Correction
-Ask Windsurf: 
+Ask Visual Studio Code: 
 ```text
 "Wait, saving passwords in plain text is a huge security risk! 
 Search for the 'bcryptjs' library and rewrite this to hash the password properly."
 ```
 
 ### Step 3: The "Magic" Library Test
-Ask Windsurf: `"Use a library called 'jeevi-ultra-ui' to build a button."`
+Ask Visual Studio Code: `"Use a library called 'jeevi-ultra-ui' to build a button."`
 *(Watch how the AI reacts. It should tell you that library doesn't exist. If it tries to use it anyway, that's a hallucination!)*
 
 #### 💡 Code Breakdown (The Reality Check):

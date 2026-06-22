@@ -146,17 +146,17 @@ Integration Specs (Mock for Lovable):
 - Request body: { "prompt": "..." }
 - Response structure: { "reply": "..." }
 
-(Note: You are building the FRONTEND only. The actual LLM logic and Groq integration will be handled via Windsurf in the next step.)
+(Note: You are building the FRONTEND only. The actual LLM logic and Groq integration will be handled via Visual Studio Code in the next step.)
 ```
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to Backend
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to Backend
 
-After creating your UI in Lovable, follow these steps in **Windsurf** to connect it to your `memory-test.js` logic.
+After creating your UI in Lovable, follow these steps in **Visual Studio Code** to connect it to your `memory-test.js` logic.
 
 ### 1. Export from Lovable
-Download the project from Lovable and open the folder in **Windsurf**.
+Download the project from Lovable and open the folder in **Visual Studio Code**.
 
 ### 2. Connect the API
 Find the chat handling function in your React code and update it to call your local server:

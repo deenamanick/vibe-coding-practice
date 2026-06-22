@@ -32,10 +32,10 @@ Make it look like a premium productivity tool for elite developers!
 
 ---
 
-## 🌊 Windsurf + Vite Setup (Pro Development)
+## 🌊 Visual Studio Code + Vite Setup (Pro Development)
 
 ### Step 1: Initialize with Vite
-1. Open **Windsurf** terminal and run:
+1. Open **Visual Studio Code** terminal and run:
    ```bash
    npm create vite@latest vibe-tracker -- --template react
    cd vibe-tracker
@@ -43,7 +43,7 @@ Make it look like a premium productivity tool for elite developers!
    npm install -D tailwindcss postcss autoprefixer
    npx tailwindcss init -p
    ```
-2. Ask Windsurf: `"Configure Tailwind CSS for this Vite React project and set up a clean folder structure."`
+2. Ask Visual Studio Code: `"Configure Tailwind CSS for this Vite React project and set up a clean folder structure."`
 
 ### Step 2: Building Components
 Use **React** to make the dashboard dynamic. Refer to your **Module 2: React** notes.
@@ -83,7 +83,7 @@ export default function GoalSetter({ onAddGoal }) {
 ## 🚀 Deployment (Going Live)
 
 ### Step 1: Build for Production
-1. In Windsurf terminal:
+1. In Visual Studio Code terminal:
    ```bash
    npm run build
    ```
@@ -96,14 +96,14 @@ export default function GoalSetter({ onAddGoal }) {
 ---
 
 ## Quick practice tasks
-- **Component Breakout**: Ask Windsurf: `"Help me move the VibeFeed into its own separate React component file."`
+- **Component Breakout**: Ask Visual Studio Code: `"Help me move the VibeFeed into its own separate React component file."`
 - **Tailwind Polish**: Use Tailwind to add a `backdrop-blur-md` effect to your sidebar.
-- **State Persistence**: Ask Windsurf: `"How do I use a useEffect hook to save my React state to localStorage?"`
+- **State Persistence**: Ask Visual Studio Code: `"How do I use a useEffect hook to save my React state to localStorage?"`
 
 ---
 
 ## Checklist
 - [ ] Your app is running on **Vite** and built with **React**.
 - [ ] You used **Tailwind CSS** for all styling (no custom CSS files).
-- [ ] You used **Windsurf** to scaffold the project and manage components.
+- [ ] You used **Visual Studio Code** to scaffold the project and manage components.
 - [ ] Your app is live with a public URL.

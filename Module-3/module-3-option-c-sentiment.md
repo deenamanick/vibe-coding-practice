@@ -41,10 +41,10 @@ Make it look like a professional sentiment analysis tool!
 
 ---
 
-## 🌊 Windsurf + Vite Setup (Pro Development)
+## 🌊 Visual Studio Code + Vite Setup (Pro Development)
 
 ### Step 1: Initialize with Vite
-1. Open **Windsurf** terminal and run:
+1. Open **Visual Studio Code** terminal and run:
    ```bash
    npm create vite@latest sentiment-app -- --template react
    cd sentiment-app
@@ -54,7 +54,7 @@ Make it look like a professional sentiment analysis tool!
    ```
 
 ### Step 2: Configure Tailwind
-Ask Windsurf: `"Set up Tailwind CSS for this React project and configure the content paths."`
+Ask Visual Studio Code: `"Set up Tailwind CSS for this React project and configure the content paths."`
 
 ### Step 3: Create the Sentiment Component (`src/SentimentChecker.jsx`)
 Replace the contents of `App.jsx` with this professional sentiment analyzer.

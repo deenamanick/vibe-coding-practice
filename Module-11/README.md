@@ -4,7 +4,7 @@ This module teaches you how to protect your applications using a **Dual-Shield**
 
 ## 🛡️ Practicals & Learning Path
 
-Every lesson in this module follows our high-performance workflow: **Lovable for high-fidelity UI** and **Windsurf for mission-critical security logic**.
+Every lesson in this module follows our high-performance workflow: **Lovable for high-fidelity UI** and **Visual Studio Code for mission-critical security logic**.
 
 - `module-11-1-hashing-passwords.md` — **Hashing Passwords**: Learn why you never store plain text and build a "Cyberpunk Hashing Visualizer."
 - `module-11-2-protecting-api-keys.md` — **Protecting API Keys**: Keep your "Gold Cards" (API Keys) safe using `.env` and `.gitignore`.
@@ -14,7 +14,7 @@ Every lesson in this module follows our high-performance workflow: **Lovable for
 
 ### 🔄 The "Vibe Coding" Workflow
 1. **Frontend (Lovable)**: Generate high-tech security dashboards, vaults, and visualizers.
-2. **Backend (Windsurf)**: Build the secure Node.js "brain" using `bcrypt`, `dotenv`, and `express-validator`.
+2. **Backend (Visual Studio Code)**: Build the secure Node.js "brain" using `bcrypt`, `dotenv`, and `express-validator`.
 3. **Integration**: Connect the two using our provided integration guides.
 
 ### 🛡 Why Security Matters?

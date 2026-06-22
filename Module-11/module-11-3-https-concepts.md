@@ -142,17 +142,17 @@ Integration Specs (Mock for Lovable):
 - Request body: { "mode": "http" | "https", "data": "..." }
 - Response structure: { "hackerSees": "...", "serverSees": "...", "isEncrypted": true }
 
-(Note: You are building the FRONTEND only. The actual encryption/decryption logic using Node.js crypto will be handled via Windsurf.)
+(Note: You are building the FRONTEND only. The actual encryption/decryption logic using Node.js crypto will be handled via Visual Studio Code.)
 ```
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to Network Simulation
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to Network Simulation
 
-Once your "Network Visualizer" UI is ready, use **Windsurf** to power it with the `https-scanner.js` logic.
+Once your "Network Visualizer" UI is ready, use **Visual Studio Code** to power it with the `https-scanner.js` logic.
 
 ### 1. Export from Lovable
-Open your downloaded Lovable project in **Windsurf**.
+Open your downloaded Lovable project in **Visual Studio Code**.
 
 ### 2. Connect the Simulation Engine
 Update your frontend to talk to your local server to show real-time encryption:

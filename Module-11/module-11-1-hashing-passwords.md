@@ -128,17 +128,17 @@ Integration Specs (Mock for Lovable):
 - Request body: { "password": "..." }
 - Response structure: { "hash": "..." }
 
-(Note: You are building the FRONTEND only. The actual hashing logic and Bcrypt integration will be handled via Windsurf in the next step.)
+(Note: You are building the FRONTEND only. The actual hashing logic and Bcrypt integration will be handled via Visual Studio Code in the next step.)
 ```
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to Secure Hashing
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to Secure Hashing
 
-Once your "Security Vault" UI is ready, use **Windsurf** to power it with the `hash-demo.js` logic.
+Once your "Security Vault" UI is ready, use **Visual Studio Code** to power it with the `hash-demo.js` logic.
 
 ### 1. Export from Lovable
-Open your downloaded Lovable project in **Windsurf**.
+Open your downloaded Lovable project in **Visual Studio Code**.
 
 ### 2. Connect the Hashing Engine
 Update your frontend to talk to your local hashing server:

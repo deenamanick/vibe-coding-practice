@@ -1,4 +1,4 @@
-## Practical 5: Project: My Automation Dashboard
+## Practical 5: Project: My Automation Dashboard (Optional)
 
 ### Why (in simple terms)
 

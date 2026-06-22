@@ -211,17 +211,17 @@ Integration Specs (Mock for Lovable):
 - PATCH /products/:id — Update with body { name?, price?, category? }
 - DELETE /products/:id — Remove item
 
-(Note: You are building the FRONTEND only. The RESTful API logic will be handled via Windsurf.)
+(Note: You are building the FRONTEND only. The RESTful API logic will be handled via Visual Studio Code.)
 ```
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to REST API
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to REST API
 
-Once your "API Design Explorer" UI is ready, use **Windsurf** to power it with the `api-design.js` logic.
+Once your "API Design Explorer" UI is ready, use **Visual Studio Code** to power it with the `api-design.js` logic.
 
 ### 1. Export from Lovable
-Open your downloaded Lovable project in **Windsurf**.
+Open your downloaded Lovable project in **Visual Studio Code**.
 
 ### 2. Connect the API Engine
 

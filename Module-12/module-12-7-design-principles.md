@@ -312,17 +312,17 @@ Integration Specs (Mock for Lovable):
     "issues": ["Deep nesting detected", "Missing security headers"]
   }
 
-(Note: You are building the FRONTEND only. The scoring engine and design analysis will be handled via Windsurf.)
+(Note: You are building the FRONTEND only. The scoring engine and design analysis will be handled via Visual Studio Code.)
 ```
 
 ---
 
-## 🛠️ Windsurf Integration Guide: Connecting UI to Design Analyzer
+## 🛠️ Visual Studio Code Integration Guide: Connecting UI to Design Analyzer
 
-Once your "API Design Principles Dashboard" is ready, use **Windsurf** to power it.
+Once your "API Design Principles Dashboard" is ready, use **Visual Studio Code** to power it.
 
 ### 1. Export from Lovable
-Open your downloaded Lovable project in **Windsurf**.
+Open your downloaded Lovable project in **Visual Studio Code**.
 
 ### 2. Connect the Design Analyzer
 
